@@ -14,8 +14,8 @@ cycle.
 In an Orbit harness runtime repository:
 
 ```sh
-harness install https://github.com/zack-nova/orbit-tdd-template.git --ref orbit-template/tdd --dry-run
-harness install https://github.com/zack-nova/orbit-tdd-template.git --ref orbit-template/tdd
+harness install https://github.com/zack-nova/orbit-tdd-template.git --dry-run
+harness install https://github.com/zack-nova/orbit-tdd-template.git
 orbit enter tdd
 ```
 
@@ -35,11 +35,9 @@ Then give the agent one focused coding task. The installed orbit guides it to:
 - TDD rule and process docs under `docs/tdd/`.
 - A reusable TDD record template for task evidence.
 - A cheap record-readiness probe at `tools/check-tdd-records.sh`.
-- Default code and test path coverage for common layouts such as `src/**`,
-  `app/**`, `pkg/**`, `tests/**`, `spec/**`, and `e2e/**`.
 
-If your project uses different source or test directories, adjust the installed
-`.harness/orbits/tdd.yaml` after installation.
+If your project needs a narrower or broader write surface, adjust the installed
+`tdd` orbit in `.harness/orbits/tdd.yaml` after installation.
 
 ## Research Behind This Template
 
@@ -49,7 +47,7 @@ verification, and spec-first agent workflows. GitHub stars were checked on
 
 | Repository | Stars | What it contributed |
 | --- | ---: | --- |
-| [obra/superpowers](https://github.com/obra/superpowers) | 147,851 | A strict TDD core: valid RED before production code, minimal GREEN, then refactor. This template keeps that core while using a calmer handoff style for blocked cases. |
+| [superpowers](https://github.com/obra/superpowers) | 147,851 | A strict TDD core: valid RED before production code, minimal GREEN, then refactor. This template keeps that core while using a calmer handoff style for blocked cases. |
 | [affaan-m/everything-claude-code](https://github.com/affaan-m/everything-claude-code) | 152,062 | A complete TDD agent/workflow shape with evidence and test-layer awareness. This template borrows the evidence mindset without forcing a universal coverage number. |
 | [github/spec-kit](https://github.com/github/spec-kit) | 87,242 | A useful model for test-first work driven by project policy and spec clarity. This template keeps room for project-specific testing discipline. |
 | [gsd-build/get-shit-done](https://github.com/gsd-build/get-shit-done) | 51,071 | Strong verification and handoff habits. This template adopts explicit blocked/gap recording so failed or uncertain TDD cycles remain useful. |
