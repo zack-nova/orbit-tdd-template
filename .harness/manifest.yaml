@@ -1,0 +1,9 @@
+schema_version: 1
+kind: orbit_template
+template:
+    orbit_id: tdd
+    default_template: false
+    created_from_branch: main
+    created_from_commit: 94106b6b3b37d60c43009477d2985ac6032bc34b
+    created_at: 2026-04-12T11:12:27Z
+variables: {}

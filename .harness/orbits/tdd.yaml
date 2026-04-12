@@ -1,0 +1,144 @@
+id: tdd
+name: TDD Orbit
+description: |
+    Keep feature, bugfix, refactor, and behavior-change work test-first, observable, and recoverable through RED/GREEN/REFACTOR evidence.
+meta:
+    file: .harness/orbits/tdd.yaml
+    agents_template: |
+        # TDD Orbit
+        You are responsible for one test-driven code change.
+
+        Start by identifying the target behavior and the smallest relevant test. Before
+        changing production code, create or update a test and verify a valid RED state:
+        the test must run or compile, execute the target path, and fail for the intended
+        behavior reason rather than setup noise.
+
+        Make the smallest production change that turns that same target GREEN. Refactor
+        only after GREEN, and keep the relevant tests GREEN afterward.
+
+        Record the evidence in `docs/tdd/records/` using
+        `docs/tdd/templates/tdd-record.md`. If a valid RED/GREEN cycle cannot be
+        established, stop and record `blocked`, `failure`, `abnormal_exit`, or
+        `external_stop` with the next useful handoff step.
+
+        Read `docs/tdd/README.md` for the rule contract, `docs/tdd/process/` for the
+        operating flow, and use `tools/check-tdd-records.sh` only as a cheap record
+        readiness probe.
+    include_in_projection: true
+    include_in_write: true
+    include_in_export: true
+    include_description_in_orchestration: true
+members:
+    - key: tdd-code-surface
+      name: Code Surface
+      description: Common production code paths for the current TDD task.
+      role: subject
+      paths:
+        include:
+            - app/**
+            - cmd/**
+            - internal/**
+            - lib/**
+            - pkg/**
+            - src/**
+      scopes:
+        write: true
+        export: false
+        orchestration: false
+    - key: tdd-test-surface
+      name: Test Surface
+      description: Common automated test paths for RED/GREEN evidence.
+      role: subject
+      paths:
+        include:
+            - __tests__/**
+            - e2e/**
+            - spec/**
+            - test/**
+            - tests/**
+      scopes:
+        write: true
+        export: false
+        orchestration: false
+    - key: tdd-record-template
+      name: TDD Record Template
+      description: Reusable evidence template for one TDD cycle.
+      role: subject
+      paths:
+        include:
+            - docs/tdd/templates/tdd-record.md
+      scopes:
+        write: true
+        export: true
+        orchestration: true
+    - key: tdd-records-contract
+      name: TDD Records Contract
+      description: Runtime record directory contract.
+      role: subject
+      paths:
+        include:
+            - docs/tdd/records/README.md
+      scopes:
+        write: true
+        export: true
+        orchestration: true
+    - key: tdd-records
+      name: TDD Records
+      description: Runtime RED/GREEN/REFACTOR evidence written during work.
+      role: subject
+      paths:
+        include:
+            - docs/tdd/records/**
+        exclude:
+            - docs/tdd/records/README.md
+      scopes:
+        write: true
+        export: false
+        orchestration: false
+    - key: tdd-rules
+      name: TDD Rules
+      description: Stable test-first rules, evidence requirements, and cheap probe.
+      role: rule
+      paths:
+        include:
+            - docs/tdd/README.md
+            - tools/check-tdd-records.sh
+      scopes:
+        write: true
+        export: true
+        orchestration: true
+    - key: tdd-process
+      name: TDD Process
+      description: Operating flow, handoff, and blocked-state guidance.
+      role: process
+      paths:
+        include:
+            - docs/tdd/process/**
+      scopes:
+        write: true
+        export: true
+        orchestration: true
+rules:
+    scope:
+        projection_roles:
+            - meta
+            - subject
+            - rule
+            - process
+        write_roles:
+            - meta
+            - subject
+            - rule
+            - process
+        export_roles:
+            - meta
+            - rule
+            - process
+        orchestration_roles:
+            - meta
+            - rule
+            - process
+    orchestration:
+        include_orbit_description: true
+        materialize_agents_from_meta: true
+
