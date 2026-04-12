@@ -15,7 +15,6 @@
 ```sh
 harness install https://github.com/zack-nova/orbit-tdd-template.git --dry-run
 harness install https://github.com/zack-nova/orbit-tdd-template.git
-orbit enter tdd
 ```
 
 然后把一个聚焦的编码任务交给 Agent。安装后的 `tdd` orbit 会引导它：
@@ -45,13 +44,13 @@ orbit enter tdd
 | 仓库 | Stars | 参考了什么 |
 | --- | ---: | --- |
 | [superpowers](https://github.com/obra/superpowers) | 147,851 | 严格 TDD 核心最清楚：有效 RED 在前、最小 GREEN、然后重构。本模板保留这个硬内核，同时把 blocked 情况处理得更适合交接。 |
-| [affaan-m/everything-claude-code](https://github.com/affaan-m/everything-claude-code) | 152,062 | TDD agent/workflow 结构完整，强调证据和测试层级。本模板吸收证据记录意识，但不强制统一覆盖率数字。 |
-| [github/spec-kit](https://github.com/github/spec-kit) | 87,242 | 很适合参考由项目原则和 spec 清晰度驱动的 test-first 顺序。本模板保留项目自身测试纪律的空间。 |
-| [gsd-build/get-shit-done](https://github.com/gsd-build/get-shit-done) | 51,071 | 验证、gap、blocked/handoff 记录做得好。本模板借鉴了失败或不确定时也能留下可交接证据的做法。 |
-| [garrytan/gstack](https://github.com/garrytan/gstack) | 70,314 | 回归测试和覆盖率审计意识强。本模板把 bug fix 与 regression evidence 绑定起来。 |
-| [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | 44,347 | QA、ATDD、traceability 视角完整。本模板把它们作为复杂场景的升级方向，而不是每个小任务的默认负担。 |
-| [Fission-AI/OpenSpec](https://github.com/Fission-AI/OpenSpec) | 39,231 | spec-first 纪律适合处理需求不清或不可测试的情况。本模板要求 Agent 在无法建立有效测试目标时先停下并澄清。 |
-| [Yeachan-Heo/oh-my-claudecode](https://github.com/Yeachan-Heo/oh-my-claudecode) | 27,919 | keyword/shortcut 进入 TDD 模式的思路很轻。本模板也保持 worker 入口简短，让 Agent 快速进入 test-first 循环。 |
+| [everything-claude-code](https://github.com/affaan-m/everything-claude-code) | 152,062 | TDD agent/workflow 结构完整，强调证据和测试层级。本模板吸收证据记录意识，但不强制统一覆盖率数字。 |
+| [spec-kit](https://github.com/github/spec-kit) | 87,242 | 很适合参考由项目原则和 spec 清晰度驱动的 test-first 顺序。本模板保留项目自身测试纪律的空间。 |
+| [get-shit-done](https://github.com/gsd-build/get-shit-done) | 51,071 | 验证、gap、blocked/handoff 记录做得好。本模板借鉴了失败或不确定时也能留下可交接证据的做法。 |
+| [gstack](https://github.com/garrytan/gstack) | 70,314 | 回归测试和覆盖率审计意识强。本模板把 bug fix 与 regression evidence 绑定起来。 |
+| [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | 44,347 | QA、ATDD、traceability 视角完整。本模板把它们作为复杂场景的升级方向，而不是每个小任务的默认负担。 |
+| [OpenSpec](https://github.com/Fission-AI/OpenSpec) | 39,231 | spec-first 纪律适合处理需求不清或不可测试的情况。本模板要求 Agent 在无法建立有效测试目标时先停下并澄清。 |
+| [oh-my-claudecode](https://github.com/Yeachan-Heo/oh-my-claudecode) | 27,919 | keyword/shortcut 进入 TDD 模式的思路很轻。本模板也保持 worker 入口简短，让 Agent 快速进入 test-first 循环。 |
 
 最终目标是：在 TDD 该严格的地方保持严格，同时足够轻量，能被安装进真实项目，
 而不是把每次小改动都变成完整 QA 工程。
