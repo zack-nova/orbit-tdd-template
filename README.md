@@ -1,61 +1,63 @@
 # orbit-tdd-template
 
-TDD workflow template for Orbit source-branch publishing.
+[中文 README](README.zh-CN.md)
 
-This repository is the source-branch authoring sandbox for the `tdd` Orbit
-template. The template exercises a test-first development lane with a narrow
-write surface, publishable Orbit metadata, and lightweight RED/GREEN/REFACTOR
-evidence.
+An Orbit template for practical test-driven coding work.
 
-## Purpose
+Use it when you want an agent to make a feature, bug fix, refactor, or behavior
+change with a clear TDD contract: create a valid RED first, make the smallest
+GREEN change, refactor only after GREEN, and leave lightweight evidence for the
+cycle.
 
-- Validate the full Orbit source-branch template flow.
-- Keep the authoring repo small enough to inspect by hand.
-- Capture experience notes while improving the workflow.
+## Quick Start
 
-## Source Branch Shape
-
-- `.harness/manifest.yaml` marks this branch as `kind: source`.
-- `.harness/orbits/tdd.yaml` is the authored OrbitSpec and worker brief truth.
-- `docs/tdd/**` and `tools/check-tdd-records.sh` are the exported template
-  content.
-- `authoring/**`, `references/**`, and root `AGENTS.md` are source-only
-  authoring material.
-- The published branch is `orbit-template/tdd`, produced with
-  `orbit template publish --orbit tdd`.
-
-## Reference Set
-
-Refresh the local reference snapshot with:
+In an Orbit harness runtime repository:
 
 ```sh
-authoring/fetch-reference-docs.sh
+harness install https://github.com/zack-nova/orbit-tdd-template.git --ref orbit-template/tdd --dry-run
+harness install https://github.com/zack-nova/orbit-tdd-template.git --ref orbit-template/tdd
+orbit enter tdd
 ```
 
-The snapshot lives under `references/repo-docs-latest/` and is ignored by Git.
-It is evidence for authoring, not template payload.
+Then give the agent one focused coding task. The installed orbit guides it to:
 
-| Repository | Reference files | Takeaway |
-| --- | --- | --- |
-| `obra/superpowers` | `README.md`, `skills/test-driven-development/SKILL.md` | Strongest strict TDD contract: valid RED before production code, minimal GREEN, then refactor. |
-| `affaan-m/everything-claude-code` | `README.md`, `agents/tdd-guide.md`, `skills/tdd-workflow/SKILL.md`, `commands/tdd.md`, `.opencode/prompts/agents/tdd-guide.txt`, `.kiro/agents/tdd-guide.md` | Complete TDD agent/skill/command model with evidence, test layers, and RED/GREEN/REFACTOR flow. |
-| `github/spec-kit` | `README.md`, `spec-driven.md`, `templates/commands/implement.md`, `templates/commands/tasks.md`, `templates/commands/constitution.md`, `docs/quickstart.md` | Good model for spec/constitution-driven test-first ordering, while keeping tests conditional on task policy. |
-| `gsd-build/get-shit-done` | `README.md`, `get-shit-done/workflows/add-tests.md`, `get-shit-done/workflows/verify-work.md`, `get-shit-done/workflows/verify-phase.md`, `get-shit-done/references/verification-patterns.md` | Strong verification, gap, and blocked-state recording patterns; not a strict default TDD flow. |
-| `garrytan/gstack` | `README.md`, `qa/SKILL.md`, `ship/SKILL.md` | Useful regression-test, coverage-audit, and ship-gate language; more QA-heavy than TDD-first. |
-| `bmad-code-org/BMAD-METHOD` | `docs/reference/testing.md`, `docs/reference/modules.md` | Useful QA/ATDD/traceability escalation model for larger systems. |
-| `Fission-AI/OpenSpec` | `README.md`, `docs/concepts.md`, `docs/workflows.md`, `docs/commands.md`, `docs/getting-started.md` | Useful spec-first discipline when a behavior is not testable or clear enough yet. |
-| `Yeachan-Heo/oh-my-claudecode` | `AGENTS.md`, `docs/REFERENCE.md` | Useful keyword/shortcut routing pattern for entering a TDD mode quickly. |
+- choose or add the smallest relevant test first
+- run the target and confirm the failure is a real RED, not setup noise
+- make the minimal production change to reach GREEN
+- keep GREEN during any refactor
+- record RED/GREEN/REFACTOR evidence under `docs/tdd/records/`
 
-## Development Approach
+## What You Get
 
-- Keep the Orbit source truth in `.harness/orbits/tdd.yaml`.
-- Keep installed-worker instructions concise in `meta.agents_template`; keep
-  deeper authoring rationale in `authoring/**` and this README.
-- Preserve the strict core rule: establish a valid RED before changing
-  production code, rerun the same target to reach GREEN, then refactor only
-  while GREEN stays green.
-- Require a small TDD record for evidence, but avoid imposing a universal
-  coverage threshold or full unit/integration/E2E stack on every project.
-- Use the reference snapshot to compare patterns and then write original,
-  Orbit-specific template content. Do not copy long third-party docs into the
-  template payload.
+- A `tdd` orbit for test-first feature, bug fix, refactor, and behavior-change
+  work.
+- A concise worker brief that points the agent to the TDD contract.
+- TDD rule and process docs under `docs/tdd/`.
+- A reusable TDD record template for task evidence.
+- A cheap record-readiness probe at `tools/check-tdd-records.sh`.
+- Default code and test path coverage for common layouts such as `src/**`,
+  `app/**`, `pkg/**`, `tests/**`, `spec/**`, and `e2e/**`.
+
+If your project uses different source or test directories, adjust the installed
+`.harness/orbits/tdd.yaml` after installation.
+
+## Research Behind This Template
+
+This template was shaped by comparing several strong TDD, test-first,
+verification, and spec-first agent workflows. GitHub stars were checked on
+2026-04-12.
+
+| Repository | Stars | What it contributed |
+| --- | ---: | --- |
+| [obra/superpowers](https://github.com/obra/superpowers) | 147,851 | A strict TDD core: valid RED before production code, minimal GREEN, then refactor. This template keeps that core while using a calmer handoff style for blocked cases. |
+| [affaan-m/everything-claude-code](https://github.com/affaan-m/everything-claude-code) | 152,062 | A complete TDD agent/workflow shape with evidence and test-layer awareness. This template borrows the evidence mindset without forcing a universal coverage number. |
+| [github/spec-kit](https://github.com/github/spec-kit) | 87,242 | A useful model for test-first work driven by project policy and spec clarity. This template keeps room for project-specific testing discipline. |
+| [gsd-build/get-shit-done](https://github.com/gsd-build/get-shit-done) | 51,071 | Strong verification and handoff habits. This template adopts explicit blocked/gap recording so failed or uncertain TDD cycles remain useful. |
+| [garrytan/gstack](https://github.com/garrytan/gstack) | 70,314 | Regression-test and coverage-audit instincts. This template reflects that by making bug fixes prove the regression path. |
+| [bmad-code-org/BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | 44,347 | Broader QA, ATDD, and traceability framing. This template treats those as escalation paths rather than requirements for every small task. |
+| [Fission-AI/OpenSpec](https://github.com/Fission-AI/OpenSpec) | 39,231 | Spec-first discipline for unclear behavior. This template tells agents to stop and clarify when a valid test target cannot be established. |
+| [Yeachan-Heo/oh-my-claudecode](https://github.com/Yeachan-Heo/oh-my-claudecode) | 27,919 | A compact TDD entry-mode idea. This template keeps the installed worker entry short so the agent can get to the test-first loop quickly. |
+
+The result is intentionally focused: strict where TDD needs to be strict, but
+lightweight enough to install into real projects without turning every change
+into a full QA program.
