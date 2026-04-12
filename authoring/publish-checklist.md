@@ -14,4 +14,6 @@ Use this checklist before publishing the `tdd` orbit from source to template.
 6. Check exported rules and process docs for RED/GREEN/REFACTOR consistency.
 7. Run the cheap record probe only when runtime records exist:
    `tools/check-tdd-records.sh`.
-8. Run `orbit template publish --orbit tdd` and inspect the published payload.
+8. Keep `.orbit/config.yaml` as the current publish-path compatibility config.
+   Do not add legacy `.orbit/orbits/*.yaml` definitions.
+9. Run `orbit template publish --orbit tdd` and inspect the published payload.
