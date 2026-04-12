@@ -1,8 +1,0 @@
-version: 1
-shared_scope: []
-projection_visible: []
-behavior:
-  outside_changes_mode: warn
-  block_switch_if_hidden_dirty: true
-  commit_append_trailer: true
-  sparse_checkout_mode: no-cone

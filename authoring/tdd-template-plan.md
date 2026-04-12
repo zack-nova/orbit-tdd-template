@@ -6,7 +6,7 @@
 
 ## 输入材料
 
-- 本地参考清单：`tdd_related_repos_notes.md`
+- 本地参考清单：`README.md`
 - 下载原文：`references/repo-docs-latest/`
 - Orbit 作者指南：`/Users/zack/Code/Vocation/orbit/docs/orbit_template_authoring_guide.md`
 - Orbit 内容指南：`/Users/zack/Code/Vocation/orbit/docs/orbit_template_content_guide.md`
@@ -22,7 +22,7 @@
 - source branch 用 `kind: source`
 - 发布用 `orbit template publish` 产出 `orbit-template/tdd`
 - source-only 文件可以保留在 source branch，但不能进入 published payload
-- 根 `AGENTS.md` 只能当 brief materialized artifact，不能当 authored truth
+- 根 `AGENTS.md` 可以作为 source-branch 维护说明，但不能作为模板 authored truth 或 published payload
 - brief 的结构化 truth 是 `.harness/orbits/tdd.yaml -> meta.agents_template`
 - publish / save 只消费 `export` surface，不能把 projection 误当 template payload
 
@@ -160,13 +160,12 @@ tools/
   check-tdd-records.sh
 
 authoring/
+  fetch-reference-docs.sh
   publish-checklist.md
   tdd-template-plan.md
 
 references/
   repo-docs-latest/
-
-tdd_related_repos_notes.md
 ```
 
 Published `orbit_template` payload should include:
@@ -182,7 +181,6 @@ Published payload should exclude:
 
 - `authoring/**`
 - `references/**`
-- `tdd_related_repos_notes.md`
 - root `AGENTS.md`
 - runtime records under `docs/tdd/records/*.md`
 
@@ -228,4 +226,3 @@ Initial member plan:
 7. E2E:
    - Recommended default: include E2E only for critical user-visible flows or when task scope demands it.
    - Alternative: require unit + integration + E2E for every feature, which is heavier and may overfit web apps.
-
