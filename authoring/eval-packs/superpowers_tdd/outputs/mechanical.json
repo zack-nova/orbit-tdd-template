@@ -1,0 +1,28 @@
+{
+  "row_id": "superpowers_tdd",
+  "spec_display": "superpowers:tdd",
+  "source_kind": "external_reference",
+  "source_repo": "obra/superpowers",
+  "source_commit": null,
+  "source_commit_pinned": false,
+  "tokenizer": "o200k_base",
+  "static_file_count": 2,
+  "static_file_tokens": [
+    {
+      "path": "README.md",
+      "tokens": 1613
+    },
+    {
+      "path": "skills/test-driven-development/SKILL.md",
+      "tokens": 2406
+    }
+  ],
+  "static_load_tokens": 4019,
+  "static_load_display": "4.0k",
+  "max_file": {
+    "path": "skills/test-driven-development/SKILL.md",
+    "tokens": 2406,
+    "display": "2.4k"
+  },
+  "missing_files": []
+}

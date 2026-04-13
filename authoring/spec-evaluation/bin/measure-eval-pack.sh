@@ -3,4 +3,4 @@ set -eu
 
 script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 
-exec "$script_dir/readme/fetch-reference-docs.sh" "$@"
+exec uvx --from tiktoken python "$script_dir/../scripts/measure_eval_pack.py" "$@"

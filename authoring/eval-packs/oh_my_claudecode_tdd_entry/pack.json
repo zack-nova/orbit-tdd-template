@@ -1,0 +1,27 @@
+{
+  "row_id": "oh_my_claudecode_tdd_entry",
+  "spec_display": "omc:entry",
+  "source_kind": "external_reference",
+  "source_repo": "Yeachan-Heo/oh-my-claudecode",
+  "source_commit": null,
+  "source_commit_pinned": false,
+  "comparison_unit": "entry-mode and reference docs",
+  "entrypoint_files": [
+    "AGENTS.md",
+    "docs/REFERENCE.md"
+  ],
+  "allowed_files": [
+    "AGENTS.md",
+    "docs/REFERENCE.md"
+  ],
+  "missing_files": [],
+  "surface_taxonomy": [
+    "entry_brief",
+    "rules_workflow",
+    "implementation_code",
+    "tests_checks",
+    "evidence_records",
+    "specs_plans",
+    "qa_release_review"
+  ]
+}

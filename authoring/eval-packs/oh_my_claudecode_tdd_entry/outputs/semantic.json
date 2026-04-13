@@ -1,0 +1,212 @@
+{
+  "spec_display": "omc:entry",
+  "use_case_display": "Agent orchestration / TDD",
+  "use_case_evidence": [
+    {
+      "file": "AGENTS.md",
+      "must_contain": "Your role is to coordinate specialized agents, tools, and skills so work is completed accurately and efficiently."
+    },
+    {
+      "file": "docs/REFERENCE.md",
+      "must_contain": "| TDD workflow                 | `test-engineer`               | sonnet |"
+    }
+  ],
+  "startup": {
+    "phases": [
+      {
+        "files": [
+          "AGENTS.md"
+        ],
+        "why": "The AGENTS file defines the operating model, routing, gates, and required post-change checks.",
+        "evidence": [
+          {
+            "file": "AGENTS.md",
+            "must_contain": "Your role is to coordinate specialized agents, tools, and skills so work is completed accurately and efficiently."
+          },
+          {
+            "file": "AGENTS.md",
+            "must_contain": "Run lint, typecheck, tests, and static analysis after changes."
+          }
+        ]
+      },
+      {
+        "files": [
+          "docs/REFERENCE.md"
+        ],
+        "why": "The reference doc defines the command entrypoints, artifact model, and available specialist agents.",
+        "evidence": [
+          {
+            "file": "docs/REFERENCE.md",
+            "must_contain": "## CLI Commands: ask/team/session"
+          },
+          {
+            "file": "docs/REFERENCE.md",
+            "must_contain": "### Artifact descriptors and bounded handoff"
+          }
+        ]
+      }
+    ]
+  },
+  "verification": {
+    "label": "strong",
+    "actions": [
+      {
+        "id": "regression_first",
+        "kind": "regression_check",
+        "why": "The workflow explicitly asks to lock behavior with regression tests first when practical.",
+        "evidence": [
+          {
+            "file": "AGENTS.md",
+            "must_contain": "Lock behavior with regression tests first when practical."
+          }
+        ]
+      },
+      {
+        "id": "post_change_checks",
+        "kind": "final_validation",
+        "why": "The AGENTS contract requires lint, typecheck, tests, and static analysis after changes.",
+        "evidence": [
+          {
+            "file": "AGENTS.md",
+            "must_contain": "Run lint, typecheck, tests, and static analysis after changes."
+          }
+        ]
+      },
+      {
+        "id": "completion_evidence",
+        "kind": "target_check",
+        "why": "Completion requires explicit evidence that tasks are done, features work, tests pass, and verification evidence exists.",
+        "evidence": [
+          {
+            "file": "AGENTS.md",
+            "must_contain": "Before concluding, confirm: zero pending tasks, all features working, tests passing, zero errors, verification evidence collected."
+          }
+        ]
+      }
+    ],
+    "has_probe": false
+  },
+  "write_boundary": {
+    "surfaces": [
+      {
+        "key": "entry_brief",
+        "writable": false,
+        "why": "The entry docs are read as operating rules and not rewritten during normal execution.",
+        "evidence": [
+          {
+            "file": "AGENTS.md",
+            "must_contain": "Your role is to coordinate specialized agents, tools, and skills so work is completed accurately and efficiently."
+          }
+        ]
+      },
+      {
+        "key": "rules_workflow",
+        "writable": false,
+        "why": "The AGENTS and reference docs define orchestration rules rather than normal output files.",
+        "evidence": [
+          {
+            "file": "docs/REFERENCE.md",
+            "must_contain": "### Agent Selection Guide"
+          }
+        ]
+      },
+      {
+        "key": "implementation_code",
+        "writable": true,
+        "why": "The default feature workflow includes executor-driven implementation.",
+        "evidence": [
+          {
+            "file": "AGENTS.md",
+            "must_contain": "Feature Development:"
+          },
+          {
+            "file": "AGENTS.md",
+            "must_contain": "analyst -> planner -> executor -> test-engineer -> code-reviewer -> verifier"
+          }
+        ]
+      },
+      {
+        "key": "tests_checks",
+        "writable": true,
+        "why": "The TDD route explicitly favors test-engineer and regression tests.",
+        "evidence": [
+          {
+            "file": "AGENTS.md",
+            "must_contain": "| \"tdd\", \"test first\" | keyword mode | Inject TDD-mode guidance and favor test-first execution with `test-engineer` when appropriate |"
+          },
+          {
+            "file": "docs/REFERENCE.md",
+            "must_contain": "| TDD workflow                 | `test-engineer`               | sonnet |"
+          }
+        ]
+      },
+      {
+        "key": "evidence_records",
+        "writable": true,
+        "why": "The system persists ask artifacts and bounded-handoff artifacts as durable outputs.",
+        "evidence": [
+          {
+            "file": "docs/REFERENCE.md",
+            "must_contain": "- Artifacts: `.omc/artifacts/ask/{provider}-{slug}-{timestamp}.md`"
+          },
+          {
+            "file": "docs/REFERENCE.md",
+            "must_contain": "shared interop state writes oversized task descriptions, task results, and shared messages to `.omc/state/interop/artifacts/**`"
+          }
+        ]
+      },
+      {
+        "key": "specs_plans",
+        "writable": true,
+        "why": "The planning gate explicitly requires PRD and test-spec artifacts under .omc/plans.",
+        "evidence": [
+          {
+            "file": "AGENTS.md",
+            "must_contain": "Planning is complete only after both `.omc/plans/prd-*.md` and `.omc/plans/test-spec-*.md` exist."
+          },
+          {
+            "file": "AGENTS.md",
+            "must_contain": "- `.omc/plans/` -- Planning documents"
+          }
+        ]
+      },
+      {
+        "key": "qa_release_review",
+        "writable": false,
+        "why": "Review and verification roles exist, but the entry docs do not require a dedicated QA or release artifact in the normal path.",
+        "evidence": [
+          {
+            "file": "AGENTS.md",
+            "must_contain": "code-reviewer -> verifier"
+          }
+        ]
+      }
+    ]
+  },
+  "recovery": {
+    "label": "recoverable",
+    "non_success_states": [
+      "blocked",
+      "failed",
+      "planning_incomplete"
+    ],
+    "has_blocked_reason": true,
+    "has_next_step": true,
+    "has_files_touched": false,
+    "has_final_validation": true,
+    "evidence": [
+      {
+        "file": "AGENTS.md",
+        "must_contain": "Work is blocked and cannot proceed: explain the blocker, then invoke cancel."
+      },
+      {
+        "file": "docs/REFERENCE.md",
+        "must_contain": "malformed result artifacts are treated as terminal `failed`."
+      },
+      {
+        "file": "AGENTS.md",
+        "must_contain": "Planning is complete only after both `.omc/plans/prd-*.md` and `.omc/plans/test-spec-*.md` exist."
+      }
+    ]
+  }
+}

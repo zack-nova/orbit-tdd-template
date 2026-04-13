@@ -1,0 +1,44 @@
+{
+  "row_id": "everything_claude_code_tdd",
+  "spec_display": "ecc:tdd",
+  "source_kind": "external_reference",
+  "source_repo": "affaan-m/everything-claude-code",
+  "source_commit": null,
+  "source_commit_pinned": false,
+  "tokenizer": "o200k_base",
+  "static_file_count": 6,
+  "static_file_tokens": [
+    {
+      "path": "README.md",
+      "tokens": 16502
+    },
+    {
+      "path": "agents/tdd-guide.md",
+      "tokens": 699
+    },
+    {
+      "path": "skills/tdd-workflow/SKILL.md",
+      "tokens": 3075
+    },
+    {
+      "path": "commands/tdd.md",
+      "tokens": 1602
+    },
+    {
+      "path": ".opencode/prompts/agents/tdd-guide.txt",
+      "tokens": 1380
+    },
+    {
+      "path": ".kiro/agents/tdd-guide.md",
+      "tokens": 690
+    }
+  ],
+  "static_load_tokens": 23948,
+  "static_load_display": "23.9k",
+  "max_file": {
+    "path": "README.md",
+    "tokens": 16502,
+    "display": "16.5k"
+  },
+  "missing_files": []
+}

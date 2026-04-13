@@ -1,0 +1,32 @@
+{
+  "row_id": "gstack_qa",
+  "spec_display": "gstack:qa",
+  "source_kind": "external_reference",
+  "source_repo": "garrytan/gstack",
+  "source_commit": null,
+  "source_commit_pinned": false,
+  "tokenizer": "o200k_base",
+  "static_file_count": 3,
+  "static_file_tokens": [
+    {
+      "path": "README.md",
+      "tokens": 7724
+    },
+    {
+      "path": "qa/SKILL.md",
+      "tokens": 16640
+    },
+    {
+      "path": "ship/SKILL.md",
+      "tokens": 32878
+    }
+  ],
+  "static_load_tokens": 57242,
+  "static_load_display": "57.2k",
+  "max_file": {
+    "path": "ship/SKILL.md",
+    "tokens": 32878,
+    "display": "32.9k"
+  },
+  "missing_files": []
+}

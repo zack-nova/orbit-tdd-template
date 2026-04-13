@@ -1,0 +1,26 @@
+{
+  "row_id": "bmad_testing",
+  "spec_display": "bmad:testing",
+  "source_kind": "external_reference",
+  "source_repo": "bmad-code-org/BMAD-METHOD",
+  "source_commit": null,
+  "source_commit_pinned": false,
+  "comparison_unit": "testing and modules reference",
+  "entrypoint_files": [
+    "docs/reference/testing.md"
+  ],
+  "allowed_files": [
+    "docs/reference/testing.md",
+    "docs/reference/modules.md"
+  ],
+  "missing_files": [],
+  "surface_taxonomy": [
+    "entry_brief",
+    "rules_workflow",
+    "implementation_code",
+    "tests_checks",
+    "evidence_records",
+    "specs_plans",
+    "qa_release_review"
+  ]
+}

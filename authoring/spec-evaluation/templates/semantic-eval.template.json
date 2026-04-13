@@ -1,0 +1,150 @@
+{
+  "spec_display": "<short-spec-id>",
+  "use_case_display": "<short-use-case>",
+  "use_case_evidence": [
+    {
+      "file": "<repo-relative-path>",
+      "must_contain": "<real substring from file>"
+    }
+  ],
+  "startup": {
+    "phases": [
+      {
+        "files": [
+          "<repo-relative-path>"
+        ],
+        "why": "<why this file must be read before work starts>",
+        "evidence": [
+          {
+            "file": "<repo-relative-path>",
+            "must_contain": "<real substring from file>"
+          }
+        ]
+      }
+    ]
+  },
+  "verification": {
+    "label": "strong_probe",
+    "actions": [
+      {
+        "id": "<action-id>",
+        "kind": "<target_check|rerun_same_target|final_validation|regression_check|probe>",
+        "why": "<why this counts as an explicit validation action>",
+        "evidence": [
+          {
+            "file": "<repo-relative-path>",
+            "must_contain": "<real substring from file>"
+          }
+        ]
+      }
+    ],
+    "has_probe": true,
+    "cheap_probe": {
+      "path": "<repo-relative-path>",
+      "evidence": [
+        {
+          "file": "<repo-relative-path>",
+          "must_contain": "<real substring from file>"
+        }
+      ]
+    }
+  },
+  "write_boundary": {
+    "surfaces": [
+      {
+        "key": "entry_brief",
+        "writable": false,
+        "why": "<why this normalized surface is or is not writable during normal task execution>",
+        "evidence": [
+          {
+            "file": "<repo-relative-path>",
+            "must_contain": "<real substring from file>"
+          }
+        ]
+      },
+      {
+        "key": "rules_workflow",
+        "writable": false,
+        "why": "<why this normalized surface is or is not writable during normal task execution>",
+        "evidence": [
+          {
+            "file": "<repo-relative-path>",
+            "must_contain": "<real substring from file>"
+          }
+        ]
+      },
+      {
+        "key": "implementation_code",
+        "writable": true,
+        "why": "<why this normalized surface is or is not writable during normal task execution>",
+        "evidence": [
+          {
+            "file": "<repo-relative-path>",
+            "must_contain": "<real substring from file>"
+          }
+        ]
+      },
+      {
+        "key": "tests_checks",
+        "writable": true,
+        "why": "<why this normalized surface is or is not writable during normal task execution>",
+        "evidence": [
+          {
+            "file": "<repo-relative-path>",
+            "must_contain": "<real substring from file>"
+          }
+        ]
+      },
+      {
+        "key": "evidence_records",
+        "writable": true,
+        "why": "<why this normalized surface is or is not writable during normal task execution>",
+        "evidence": [
+          {
+            "file": "<repo-relative-path>",
+            "must_contain": "<real substring from file>"
+          }
+        ]
+      },
+      {
+        "key": "specs_plans",
+        "writable": false,
+        "why": "<why this normalized surface is or is not writable during normal task execution>",
+        "evidence": [
+          {
+            "file": "<repo-relative-path>",
+            "must_contain": "<real substring from file>"
+          }
+        ]
+      },
+      {
+        "key": "qa_release_review",
+        "writable": false,
+        "why": "<why this normalized surface is or is not writable during normal task execution>",
+        "evidence": [
+          {
+            "file": "<repo-relative-path>",
+            "must_contain": "<real substring from file>"
+          }
+        ]
+      }
+    ]
+  },
+  "recovery": {
+    "label": "complete",
+    "non_success_states": [
+      "<failure>",
+      "<blocked>"
+    ],
+    "has_blocked_reason": true,
+    "has_next_step": true,
+    "has_files_touched": true,
+    "has_final_validation": true,
+    "evidence": [
+      {
+        "file": "<repo-relative-path>",
+        "must_contain": "<real substring from file>"
+      }
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "row_id": "superpowers_tdd",
+  "spec_display": "superpowers:tdd",
+  "source_kind": "external_reference",
+  "source_repo": "obra/superpowers",
+  "source_commit": null,
+  "source_commit_pinned": false,
+  "comparison_unit": "test-driven-development skill",
+  "entrypoint_files": [
+    "skills/test-driven-development/SKILL.md"
+  ],
+  "allowed_files": [
+    "README.md",
+    "skills/test-driven-development/SKILL.md"
+  ],
+  "missing_files": [],
+  "surface_taxonomy": [
+    "entry_brief",
+    "rules_workflow",
+    "implementation_code",
+    "tests_checks",
+    "evidence_records",
+    "specs_plans",
+    "qa_release_review"
+  ]
+}

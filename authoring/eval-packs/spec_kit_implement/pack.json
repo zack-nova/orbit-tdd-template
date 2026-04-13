@@ -1,0 +1,31 @@
+{
+  "row_id": "spec_kit_implement",
+  "spec_display": "spec-kit:implement",
+  "source_kind": "external_reference",
+  "source_repo": "github/spec-kit",
+  "source_commit": null,
+  "source_commit_pinned": false,
+  "comparison_unit": "implement/tasks/constitution flow",
+  "entrypoint_files": [
+    "spec-driven.md",
+    "templates/commands/implement.md"
+  ],
+  "allowed_files": [
+    "README.md",
+    "spec-driven.md",
+    "templates/commands/implement.md",
+    "templates/commands/tasks.md",
+    "templates/commands/constitution.md",
+    "docs/quickstart.md"
+  ],
+  "missing_files": [],
+  "surface_taxonomy": [
+    "entry_brief",
+    "rules_workflow",
+    "implementation_code",
+    "tests_checks",
+    "evidence_records",
+    "specs_plans",
+    "qa_release_review"
+  ]
+}

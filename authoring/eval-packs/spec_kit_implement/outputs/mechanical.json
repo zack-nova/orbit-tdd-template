@@ -1,0 +1,44 @@
+{
+  "row_id": "spec_kit_implement",
+  "spec_display": "spec-kit:implement",
+  "source_kind": "external_reference",
+  "source_repo": "github/spec-kit",
+  "source_commit": null,
+  "source_commit_pinned": false,
+  "tokenizer": "o200k_base",
+  "static_file_count": 6,
+  "static_file_tokens": [
+    {
+      "path": "README.md",
+      "tokens": 14540
+    },
+    {
+      "path": "spec-driven.md",
+      "tokens": 4650
+    },
+    {
+      "path": "templates/commands/implement.md",
+      "tokens": 2694
+    },
+    {
+      "path": "templates/commands/tasks.md",
+      "tokens": 2156
+    },
+    {
+      "path": "templates/commands/constitution.md",
+      "tokens": 1764
+    },
+    {
+      "path": "docs/quickstart.md",
+      "tokens": 1768
+    }
+  ],
+  "static_load_tokens": 27572,
+  "static_load_display": "27.6k",
+  "max_file": {
+    "path": "README.md",
+    "tokens": 14540,
+    "display": "14.5k"
+  },
+  "missing_files": []
+}

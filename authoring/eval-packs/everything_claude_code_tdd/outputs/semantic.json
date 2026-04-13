@@ -1,0 +1,206 @@
+{
+  "spec_display": "ecc:tdd",
+  "use_case_display": "TDD + coverage",
+  "use_case_evidence": [
+    {
+      "file": "skills/tdd-workflow/SKILL.md",
+      "must_contain": "description: Use this skill when writing new features, fixing bugs, or refactoring code."
+    },
+    {
+      "file": "skills/tdd-workflow/SKILL.md",
+      "must_contain": "Enforces test-driven development with 80%+ coverage"
+    }
+  ],
+  "startup": {
+    "phases": [
+      {
+        "files": [
+          "README.md"
+        ],
+        "why": "The README tells the user that skills are the primary workflow surface.",
+        "evidence": [
+          {
+            "file": "README.md",
+            "must_contain": "Skills are the primary workflow surface."
+          }
+        ]
+      },
+      {
+        "files": [
+          "skills/tdd-workflow/SKILL.md"
+        ],
+        "why": "The skill file defines the actual TDD workflow, coverage policy, and required test types.",
+        "evidence": [
+          {
+            "file": "skills/tdd-workflow/SKILL.md",
+            "must_contain": "# Test-Driven Development Workflow"
+          },
+          {
+            "file": "skills/tdd-workflow/SKILL.md",
+            "must_contain": "## TDD Workflow Steps"
+          }
+        ]
+      }
+    ]
+  },
+  "verification": {
+    "label": "strong",
+    "actions": [
+      {
+        "id": "red_gate",
+        "kind": "target_check",
+        "why": "Production changes are blocked until a valid RED state is confirmed.",
+        "evidence": [
+          {
+            "file": "skills/tdd-workflow/SKILL.md",
+            "must_contain": "### Step 3: Run Tests (They Should Fail)"
+          },
+          {
+            "file": "skills/tdd-workflow/SKILL.md",
+            "must_contain": "This step is mandatory and is the RED gate for all production changes."
+          }
+        ]
+      },
+      {
+        "id": "green_rerun",
+        "kind": "rerun_same_target",
+        "why": "The same relevant test target must be rerun and confirmed GREEN after the fix.",
+        "evidence": [
+          {
+            "file": "skills/tdd-workflow/SKILL.md",
+            "must_contain": "### Step 5: Run Tests Again"
+          },
+          {
+            "file": "skills/tdd-workflow/SKILL.md",
+            "must_contain": "Rerun the same relevant test target after the fix"
+          }
+        ]
+      },
+      {
+        "id": "coverage_validation",
+        "kind": "final_validation",
+        "why": "The workflow ends with an explicit coverage verification step.",
+        "evidence": [
+          {
+            "file": "skills/tdd-workflow/SKILL.md",
+            "must_contain": "### Step 7: Verify Coverage"
+          },
+          {
+            "file": "skills/tdd-workflow/SKILL.md",
+            "must_contain": "npm run test:coverage"
+          }
+        ]
+      }
+    ],
+    "has_probe": false
+  },
+  "write_boundary": {
+    "surfaces": [
+      {
+        "key": "entry_brief",
+        "writable": false,
+        "why": "The skill file is read as the contract and is not rewritten during the task.",
+        "evidence": [
+          {
+            "file": "skills/tdd-workflow/SKILL.md",
+            "must_contain": "# Test-Driven Development Workflow"
+          }
+        ]
+      },
+      {
+        "key": "rules_workflow",
+        "writable": false,
+        "why": "The TDD steps and coverage rules are consumed as instructions, not edited outputs.",
+        "evidence": [
+          {
+            "file": "skills/tdd-workflow/SKILL.md",
+            "must_contain": "## TDD Workflow Steps"
+          }
+        ]
+      },
+      {
+        "key": "implementation_code",
+        "writable": true,
+        "why": "The workflow explicitly requires implementing code after the RED gate.",
+        "evidence": [
+          {
+            "file": "skills/tdd-workflow/SKILL.md",
+            "must_contain": "### Step 4: Implement Code"
+          }
+        ]
+      },
+      {
+        "key": "tests_checks",
+        "writable": true,
+        "why": "The workflow requires generating test cases, running tests, and meeting coverage thresholds.",
+        "evidence": [
+          {
+            "file": "skills/tdd-workflow/SKILL.md",
+            "must_contain": "### Step 2: Generate Test Cases"
+          },
+          {
+            "file": "skills/tdd-workflow/SKILL.md",
+            "must_contain": "### Step 7: Verify Coverage"
+          }
+        ]
+      },
+      {
+        "key": "evidence_records",
+        "writable": true,
+        "why": "The workflow requires Git checkpoint commits after RED, GREEN, and refactor stages.",
+        "evidence": [
+          {
+            "file": "skills/tdd-workflow/SKILL.md",
+            "must_contain": "### 4. Git Checkpoints"
+          },
+          {
+            "file": "skills/tdd-workflow/SKILL.md",
+            "must_contain": "create a checkpoint commit after each TDD stage"
+          }
+        ]
+      },
+      {
+        "key": "specs_plans",
+        "writable": false,
+        "why": "The workflow starts from user journeys and test cases, but it does not define a persistent spec or plan artifact.",
+        "evidence": [
+          {
+            "file": "skills/tdd-workflow/SKILL.md",
+            "must_contain": "### Step 1: Write User Journeys"
+          }
+        ]
+      },
+      {
+        "key": "qa_release_review",
+        "writable": false,
+        "why": "Coverage checks are part of the TDD loop, but the workflow does not define a separate QA or release review artifact.",
+        "evidence": [
+          {
+            "file": "skills/tdd-workflow/SKILL.md",
+            "must_contain": "### Step 7: Verify Coverage"
+          }
+        ]
+      }
+    ]
+  },
+  "recovery": {
+    "label": "fragile",
+    "non_success_states": [
+      "invalid_red"
+    ],
+    "has_blocked_reason": false,
+    "has_next_step": false,
+    "has_files_touched": false,
+    "has_final_validation": true,
+    "evidence": [
+      {
+        "file": "skills/tdd-workflow/SKILL.md",
+        "must_contain": "A test that was only written but not compiled and executed does not count as RED."
+      },
+      {
+        "file": "skills/tdd-workflow/SKILL.md",
+        "must_contain": "Do not edit production code until this RED state is confirmed."
+      }
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "row_id": "gstack_qa",
+  "spec_display": "gstack:qa",
+  "source_kind": "external_reference",
+  "source_repo": "garrytan/gstack",
+  "source_commit": null,
+  "source_commit_pinned": false,
+  "comparison_unit": "qa and ship workflow pair",
+  "entrypoint_files": [
+    "qa/SKILL.md"
+  ],
+  "allowed_files": [
+    "README.md",
+    "qa/SKILL.md",
+    "ship/SKILL.md"
+  ],
+  "missing_files": [],
+  "surface_taxonomy": [
+    "entry_brief",
+    "rules_workflow",
+    "implementation_code",
+    "tests_checks",
+    "evidence_records",
+    "specs_plans",
+    "qa_release_review"
+  ]
+}

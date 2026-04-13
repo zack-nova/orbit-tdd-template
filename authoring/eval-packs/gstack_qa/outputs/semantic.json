@@ -1,0 +1,216 @@
+{
+  "spec_display": "gstack:qa",
+  "use_case_display": "QA / fix / ship",
+  "use_case_evidence": [
+    {
+      "file": "qa/SKILL.md",
+      "must_contain": "# /qa: Test \u2192 Fix \u2192 Verify"
+    },
+    {
+      "file": "ship/SKILL.md",
+      "must_contain": "# Ship: Fully Automated Ship Workflow"
+    }
+  ],
+  "startup": {
+    "phases": [
+      {
+        "files": [
+          "qa/SKILL.md"
+        ],
+        "why": "The qa skill defines the user-testing and bug-fixing workflow.",
+        "evidence": [
+          {
+            "file": "qa/SKILL.md",
+            "must_contain": "# /qa: Test \u2192 Fix \u2192 Verify"
+          },
+          {
+            "file": "qa/SKILL.md",
+            "must_contain": "You are a QA engineer AND a bug-fix engineer."
+          }
+        ]
+      },
+      {
+        "files": [
+          "ship/SKILL.md"
+        ],
+        "why": "The ship skill defines the review and release-readiness gate that closes the workflow.",
+        "evidence": [
+          {
+            "file": "ship/SKILL.md",
+            "must_contain": "## Review Readiness Dashboard"
+          }
+        ]
+      }
+    ]
+  },
+  "verification": {
+    "label": "strong",
+    "actions": [
+      {
+        "id": "qa_reverify",
+        "kind": "rerun_same_target",
+        "why": "The qa workflow explicitly tests, fixes, and re-verifies the application like a real user.",
+        "evidence": [
+          {
+            "file": "qa/SKILL.md",
+            "must_contain": "# /qa: Test \u2192 Fix \u2192 Verify"
+          },
+          {
+            "file": "qa/SKILL.md",
+            "must_contain": "fix them in source code with atomic commits, then re-verify."
+          }
+        ]
+      },
+      {
+        "id": "full_suite_verify",
+        "kind": "final_validation",
+        "why": "The workflow runs the full test suite as an explicit verification step.",
+        "evidence": [
+          {
+            "file": "qa/SKILL.md",
+            "must_contain": "### B5. Verify"
+          },
+          {
+            "file": "qa/SKILL.md",
+            "must_contain": "Run the full test suite to confirm everything works"
+          }
+        ]
+      },
+      {
+        "id": "review_gate",
+        "kind": "regression_check",
+        "why": "Shipping is gated by a structured review-readiness dashboard and verdict logic.",
+        "evidence": [
+          {
+            "file": "ship/SKILL.md",
+            "must_contain": "## Review Readiness Dashboard"
+          },
+          {
+            "file": "ship/SKILL.md",
+            "must_contain": "**Verdict logic:**"
+          }
+        ]
+      }
+    ],
+    "has_probe": false
+  },
+  "write_boundary": {
+    "surfaces": [
+      {
+        "key": "entry_brief",
+        "writable": false,
+        "why": "The qa and ship skill files are operating instructions, not normal outputs.",
+        "evidence": [
+          {
+            "file": "qa/SKILL.md",
+            "must_contain": "# /qa: Test \u2192 Fix \u2192 Verify"
+          }
+        ]
+      },
+      {
+        "key": "rules_workflow",
+        "writable": false,
+        "why": "The workflow sections are read as guidance and not rewritten during execution.",
+        "evidence": [
+          {
+            "file": "ship/SKILL.md",
+            "must_contain": "## Review Readiness Dashboard"
+          }
+        ]
+      },
+      {
+        "key": "implementation_code",
+        "writable": true,
+        "why": "The qa workflow explicitly fixes discovered bugs in source code.",
+        "evidence": [
+          {
+            "file": "qa/SKILL.md",
+            "must_contain": "fix them in source code with atomic commits"
+          }
+        ]
+      },
+      {
+        "key": "tests_checks",
+        "writable": true,
+        "why": "The workflow bootstraps tests when missing and runs the full suite.",
+        "evidence": [
+          {
+            "file": "qa/SKILL.md",
+            "must_contain": "### B4.5. First real tests"
+          },
+          {
+            "file": "qa/SKILL.md",
+            "must_contain": "### B5. Verify"
+          }
+        ]
+      },
+      {
+        "key": "evidence_records",
+        "writable": true,
+        "why": "The workflow creates QA reports and screenshots under the project.",
+        "evidence": [
+          {
+            "file": "qa/SKILL.md",
+            "must_contain": "mkdir -p .gstack/qa-reports/screenshots"
+          }
+        ]
+      },
+      {
+        "key": "specs_plans",
+        "writable": false,
+        "why": "The pair operates on testing and shipping readiness rather than writing spec or plan artifacts.",
+        "evidence": [
+          {
+            "file": "qa/SKILL.md",
+            "must_contain": "Output dir | `.gstack/qa-reports/`"
+          }
+        ]
+      },
+      {
+        "key": "qa_release_review",
+        "writable": true,
+        "why": "The ship workflow maintains explicit review and shipping status.",
+        "evidence": [
+          {
+            "file": "ship/SKILL.md",
+            "must_contain": "## Review Readiness Dashboard"
+          },
+          {
+            "file": "ship/SKILL.md",
+            "must_contain": "| VERDICT: CLEARED"
+          }
+        ]
+      }
+    ]
+  },
+  "recovery": {
+    "label": "complete",
+    "non_success_states": [
+      "done_with_concerns",
+      "blocked",
+      "needs_context"
+    ],
+    "has_blocked_reason": true,
+    "has_next_step": true,
+    "has_files_touched": false,
+    "has_final_validation": true,
+    "evidence": [
+      {
+        "file": "qa/SKILL.md",
+        "must_contain": "- **DONE_WITH_CONCERNS** \u2014 Completed, but with issues the user should know about."
+      },
+      {
+        "file": "qa/SKILL.md",
+        "must_contain": "- **BLOCKED** \u2014 Cannot proceed. State what is blocking and what was tried."
+      },
+      {
+        "file": "qa/SKILL.md",
+        "must_contain": "- **NEEDS_CONTEXT** \u2014 Missing information required to continue."
+      },
+      {
+        "file": "qa/SKILL.md",
+        "must_contain": "RECOMMENDATION: [what the user should do next]"
+      }
+    ]
+  }
+}

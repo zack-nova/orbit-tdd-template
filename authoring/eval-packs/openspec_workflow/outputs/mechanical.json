@@ -1,0 +1,40 @@
+{
+  "row_id": "openspec_workflow",
+  "spec_display": "openspec:workflow",
+  "source_kind": "external_reference",
+  "source_repo": "Fission-AI/OpenSpec",
+  "source_commit": null,
+  "source_commit_pinned": false,
+  "tokenizer": "o200k_base",
+  "static_file_count": 5,
+  "static_file_tokens": [
+    {
+      "path": "README.md",
+      "tokens": 1956
+    },
+    {
+      "path": "docs/concepts.md",
+      "tokens": 4807
+    },
+    {
+      "path": "docs/workflows.md",
+      "tokens": 3045
+    },
+    {
+      "path": "docs/commands.md",
+      "tokens": 4712
+    },
+    {
+      "path": "docs/getting-started.md",
+      "tokens": 1701
+    }
+  ],
+  "static_load_tokens": 16221,
+  "static_load_display": "16.2k",
+  "max_file": {
+    "path": "docs/concepts.md",
+    "tokens": 4807,
+    "display": "4.8k"
+  },
+  "missing_files": []
+}

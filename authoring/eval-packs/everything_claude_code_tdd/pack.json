@@ -1,0 +1,32 @@
+{
+  "row_id": "everything_claude_code_tdd",
+  "spec_display": "ecc:tdd",
+  "source_kind": "external_reference",
+  "source_repo": "affaan-m/everything-claude-code",
+  "source_commit": null,
+  "source_commit_pinned": false,
+  "comparison_unit": "tdd workflow bundle",
+  "entrypoint_files": [
+    "agents/tdd-guide.md",
+    "skills/tdd-workflow/SKILL.md",
+    "commands/tdd.md"
+  ],
+  "allowed_files": [
+    "README.md",
+    "agents/tdd-guide.md",
+    "skills/tdd-workflow/SKILL.md",
+    "commands/tdd.md",
+    ".opencode/prompts/agents/tdd-guide.txt",
+    ".kiro/agents/tdd-guide.md"
+  ],
+  "missing_files": [],
+  "surface_taxonomy": [
+    "entry_brief",
+    "rules_workflow",
+    "implementation_code",
+    "tests_checks",
+    "evidence_records",
+    "specs_plans",
+    "qa_release_review"
+  ]
+}

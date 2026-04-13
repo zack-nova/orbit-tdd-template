@@ -1,0 +1,196 @@
+{
+  "spec_display": "openspec:workflow",
+  "use_case_display": "Spec-first change workflow",
+  "use_case_evidence": [
+    {
+      "file": "docs/workflows.md",
+      "must_contain": "**Best for:** Small to medium features, bug fixes, straightforward changes."
+    },
+    {
+      "file": "docs/commands.md",
+      "must_contain": "| `/opsx:apply` | Implement tasks from the change |"
+    }
+  ],
+  "startup": {
+    "phases": [
+      {
+        "files": [
+          "docs/workflows.md"
+        ],
+        "why": "The workflows guide defines the default and expanded paths and explains when to use each one.",
+        "evidence": [
+          {
+            "file": "docs/workflows.md",
+            "must_contain": "## Two Modes"
+          },
+          {
+            "file": "docs/workflows.md",
+            "must_contain": "### Quick Feature"
+          }
+        ]
+      },
+      {
+        "files": [
+          "docs/commands.md"
+        ],
+        "why": "The commands reference gives the concrete command surface that executes the workflow.",
+        "evidence": [
+          {
+            "file": "docs/commands.md",
+            "must_contain": "## Quick Reference"
+          },
+          {
+            "file": "docs/commands.md",
+            "must_contain": "| `/opsx:propose` | Create a change and generate planning artifacts in one step |"
+          }
+        ]
+      }
+    ]
+  },
+  "verification": {
+    "label": "medium",
+    "actions": [
+      {
+        "id": "spec_validate",
+        "kind": "target_check",
+        "why": "The getting-started guide explicitly includes spec validation before implementation.",
+        "evidence": [
+          {
+            "file": "docs/getting-started.md",
+            "must_contain": "# Validate spec formatting"
+          }
+        ]
+      },
+      {
+        "id": "opsx_verify",
+        "kind": "final_validation",
+        "why": "The workflow includes a dedicated verify step that checks completeness, correctness, and coherence.",
+        "evidence": [
+          {
+            "file": "docs/workflows.md",
+            "must_contain": "`/opsx:verify` validates implementation against your artifacts across three dimensions:"
+          },
+          {
+            "file": "docs/workflows.md",
+            "must_contain": "| Completeness | All tasks done, all requirements implemented, scenarios covered |"
+          }
+        ]
+      }
+    ],
+    "has_probe": false
+  },
+  "write_boundary": {
+    "surfaces": [
+      {
+        "key": "entry_brief",
+        "writable": false,
+        "why": "The workflow and command guides are read as instructions rather than rewritten outputs.",
+        "evidence": [
+          {
+            "file": "docs/workflows.md",
+            "must_contain": "## Philosophy: Actions, Not Phases"
+          }
+        ]
+      },
+      {
+        "key": "rules_workflow",
+        "writable": false,
+        "why": "Workflow patterns are descriptive guidance and not normal writable artifacts.",
+        "evidence": [
+          {
+            "file": "docs/workflows.md",
+            "must_contain": "## Workflow Patterns (Expanded Mode)"
+          }
+        ]
+      },
+      {
+        "key": "implementation_code",
+        "writable": true,
+        "why": "The apply command works through tasks and implements the change.",
+        "evidence": [
+          {
+            "file": "docs/workflows.md",
+            "must_contain": "AI:  Working through tasks..."
+          }
+        ]
+      },
+      {
+        "key": "tests_checks",
+        "writable": true,
+        "why": "The workflow explicitly validates spec formatting and scenario coverage.",
+        "evidence": [
+          {
+            "file": "docs/getting-started.md",
+            "must_contain": "# Validate spec formatting"
+          },
+          {
+            "file": "docs/workflows.md",
+            "must_contain": "\u26a0 Scenario \"Session timeout after inactivity\" not tested"
+          }
+        ]
+      },
+      {
+        "key": "evidence_records",
+        "writable": false,
+        "why": "The workflow relies on change artifacts and warnings but does not define a separate evidence record file.",
+        "evidence": [
+          {
+            "file": "docs/workflows.md",
+            "must_contain": "SUMMARY"
+          }
+        ]
+      },
+      {
+        "key": "specs_plans",
+        "writable": true,
+        "why": "The workflow creates proposal, specs, design, and tasks artifacts before implementation.",
+        "evidence": [
+          {
+            "file": "docs/commands.md",
+            "must_contain": "Generates artifacts needed before implementation (for `spec-driven`: proposal, specs, design, tasks)"
+          },
+          {
+            "file": "docs/getting-started.md",
+            "must_contain": "\u2713 proposal.md \u2014 why we're doing this, what's changing"
+          }
+        ]
+      },
+      {
+        "key": "qa_release_review",
+        "writable": false,
+        "why": "Verify and archive warn about issues, but the workflow does not create a separate QA or release review document by default.",
+        "evidence": [
+          {
+            "file": "docs/workflows.md",
+            "must_contain": "Verify won't block archive, but it surfaces issues you might want to address first."
+          }
+        ]
+      }
+    ]
+  },
+  "recovery": {
+    "label": "recoverable",
+    "non_success_states": [
+      "with_warnings",
+      "not_synced"
+    ],
+    "has_blocked_reason": false,
+    "has_next_step": true,
+    "has_files_touched": false,
+    "has_final_validation": true,
+    "evidence": [
+      {
+        "file": "docs/workflows.md",
+        "must_contain": "Ready to archive: Yes (with warnings)"
+      },
+      {
+        "file": "docs/workflows.md",
+        "must_contain": "Delta specs: Not yet synced to main"
+      },
+      {
+        "file": "docs/workflows.md",
+        "must_contain": "Recommendations:"
+      }
+    ]
+  }
+}

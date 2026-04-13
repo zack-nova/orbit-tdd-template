@@ -1,0 +1,252 @@
+{
+  "spec_display": "tdd",
+  "use_case_display": "TDD / code change",
+  "use_case_evidence": [
+    {
+      "file": ".harness/orbits/tdd.yaml",
+      "must_contain": "Keep feature, bugfix, refactor, and behavior-change work test-first"
+    },
+    {
+      "file": "docs/tdd/README.md",
+      "must_contain": "This orbit keeps one code change test-first and observable."
+    }
+  ],
+  "startup": {
+    "phases": [
+      {
+        "files": [
+          ".harness/orbits/tdd.yaml"
+        ],
+        "why": "The hosted spec contains the worker brief and tells the reader which rule and process docs must be read next.",
+        "evidence": [
+          {
+            "file": ".harness/orbits/tdd.yaml",
+            "must_contain": "You are responsible for one test-driven code change."
+          },
+          {
+            "file": ".harness/orbits/tdd.yaml",
+            "must_contain": "Read `docs/tdd/README.md` for the rule contract"
+          }
+        ]
+      },
+      {
+        "files": [
+          "docs/tdd/README.md",
+          "docs/tdd/process/red-green-refactor.md",
+          "docs/tdd/process/blocked-and-handoff.md"
+        ],
+        "why": "These files define the rule contract, the normal RED/GREEN/REFACTOR path, and the blocked or handoff path before the worker can act safely.",
+        "evidence": [
+          {
+            "file": "docs/tdd/README.md",
+            "must_contain": "## Core Rule"
+          },
+          {
+            "file": "docs/tdd/process/red-green-refactor.md",
+            "must_contain": "# Red Green Refactor Process"
+          },
+          {
+            "file": "docs/tdd/process/blocked-and-handoff.md",
+            "must_contain": "# Blocked And Handoff"
+          }
+        ]
+      }
+    ]
+  },
+  "verification": {
+    "label": "strong_probe",
+    "actions": [
+      {
+        "id": "red_target",
+        "kind": "target_check",
+        "why": "The contract requires a valid RED signal before production code changes.",
+        "evidence": [
+          {
+            "file": "docs/tdd/README.md",
+            "must_contain": "Do not change production code until there is a valid RED signal for the target"
+          },
+          {
+            "file": "docs/tdd/templates/tdd-record.md",
+            "must_contain": "RED command:"
+          }
+        ]
+      },
+      {
+        "id": "green_rerun",
+        "kind": "rerun_same_target",
+        "why": "The same target must be rerun to prove GREEN after RED.",
+        "evidence": [
+          {
+            "file": "docs/tdd/README.md",
+            "must_contain": "After RED, make the smallest production change that turns that same target GREEN."
+          },
+          {
+            "file": "docs/tdd/templates/tdd-record.md",
+            "must_contain": "GREEN command:"
+          }
+        ]
+      },
+      {
+        "id": "final_validation",
+        "kind": "final_validation",
+        "why": "The process requires final validation after the narrow target and before leaving the orbit.",
+        "evidence": [
+          {
+            "file": "docs/tdd/process/red-green-refactor.md",
+            "must_contain": "## 6. Final Validation"
+          },
+          {
+            "file": "docs/tdd/templates/tdd-record.md",
+            "must_contain": "Final validation command:"
+          }
+        ]
+      }
+    ],
+    "has_probe": true,
+    "cheap_probe": {
+      "path": "tools/check-tdd-records.sh",
+      "evidence": [
+        {
+          "file": "docs/tdd/README.md",
+          "must_contain": "The cheap probe `tools/check-tdd-records.sh` only checks record shape."
+        },
+        {
+          "file": "tools/check-tdd-records.sh",
+          "must_contain": "ready records="
+        }
+      ]
+    }
+  },
+  "write_boundary": {
+    "surfaces": [
+      {
+        "key": "entry_brief",
+        "writable": false,
+        "why": "The entry brief is read as the task contract; the workflow does not ask the worker to rewrite it during normal execution.",
+        "evidence": [
+          {
+            "file": ".harness/orbits/tdd.yaml",
+            "must_contain": "You are responsible for one test-driven code change."
+          }
+        ]
+      },
+      {
+        "key": "rules_workflow",
+        "writable": false,
+        "why": "The rule and process docs are read as guidance, not normal task outputs.",
+        "evidence": [
+          {
+            "file": ".harness/orbits/tdd.yaml",
+            "must_contain": "Read `docs/tdd/README.md` for the rule contract"
+          },
+          {
+            "file": "docs/tdd/process/red-green-refactor.md",
+            "must_contain": "# Red Green Refactor Process"
+          }
+        ]
+      },
+      {
+        "key": "implementation_code",
+        "writable": true,
+        "why": "The workflow explicitly tells the worker to change production code after RED to make the target GREEN.",
+        "evidence": [
+          {
+            "file": ".harness/orbits/tdd.yaml",
+            "must_contain": "Make the smallest production change that turns that same target GREEN."
+          }
+        ]
+      },
+      {
+        "key": "tests_checks",
+        "writable": true,
+        "why": "The workflow explicitly requires creating or updating a test before production changes.",
+        "evidence": [
+          {
+            "file": ".harness/orbits/tdd.yaml",
+            "must_contain": "create or update a test and verify a valid RED state"
+          }
+        ]
+      },
+      {
+        "key": "evidence_records",
+        "writable": true,
+        "why": "The workflow explicitly requires writing one record per TDD task.",
+        "evidence": [
+          {
+            "file": "docs/tdd/README.md",
+            "must_contain": "Write one record per TDD task in `docs/tdd/records/`"
+          }
+        ]
+      },
+      {
+        "key": "specs_plans",
+        "writable": false,
+        "why": "No normal task path requires writing a spec or plan artifact.",
+        "evidence": [
+          {
+            "file": "docs/tdd/README.md",
+            "must_contain": "It is not a release gate, whole-project QA process, enterprise test strategy,"
+          }
+        ]
+      },
+      {
+        "key": "qa_release_review",
+        "writable": false,
+        "why": "The workflow asks for final validation but does not require creating dedicated QA, release, or review artifacts.",
+        "evidence": [
+          {
+            "file": "docs/tdd/process/red-green-refactor.md",
+            "must_contain": "Then run the broader project command when it is"
+          }
+        ]
+      }
+    ]
+  },
+  "recovery": {
+    "label": "complete",
+    "non_success_states": [
+      "failure",
+      "blocked",
+      "abnormal_exit",
+      "external_stop"
+    ],
+    "has_blocked_reason": true,
+    "has_next_step": true,
+    "has_files_touched": true,
+    "has_final_validation": true,
+    "evidence": [
+      {
+        "file": "docs/tdd/process/blocked-and-handoff.md",
+        "must_contain": "- `failure`: RED was valid, but GREEN could not be achieved"
+      },
+      {
+        "file": "docs/tdd/process/blocked-and-handoff.md",
+        "must_contain": "- `blocked`: required context, dependency, environment, fixture, or approval is"
+      },
+      {
+        "file": "docs/tdd/process/blocked-and-handoff.md",
+        "must_contain": "- `abnormal_exit`: continuing would be misleading or unsafe"
+      },
+      {
+        "file": "docs/tdd/process/blocked-and-handoff.md",
+        "must_contain": "- `external_stop`: the human partner or outer runtime stopped the work."
+      },
+      {
+        "file": "docs/tdd/templates/tdd-record.md",
+        "must_contain": "Files touched:"
+      },
+      {
+        "file": "docs/tdd/templates/tdd-record.md",
+        "must_contain": "Blocked reason:"
+      },
+      {
+        "file": "docs/tdd/templates/tdd-record.md",
+        "must_contain": "Next step:"
+      },
+      {
+        "file": "docs/tdd/templates/tdd-record.md",
+        "must_contain": "Final validation command:"
+      }
+    ]
+  }
+}

@@ -2,11 +2,18 @@
 
 [English README](README.md)
 
-这是一个面向实际编码任务的 Orbit TDD 模板。
+这是一个面向真实代码变更的 Orbit TDD 模板。
 
-当你希望 Agent 在做功能、修 bug、重构或行为变更时遵守清晰的 TDD 外部合同时，
-可以安装这个模板：先建立有效 RED，再用最小实现到 GREEN，只在 GREEN 后重构，
-并留下轻量的 RED/GREEN/REFACTOR 证据。
+当你希望 Agent 处理一个聚焦的功能、修 bug、重构或行为变更，并且严格遵守
+TDD 外部合同时，可以使用这个模板：先证明有效 RED，再用最小改动到 GREEN，
+只在 GREEN 后重构，如果工作被阻塞，也要留下可交接的证据。
+
+## 为什么用这个 Spec
+
+- 在 TDD 关键点上足够严格：没有有效 RED，就不进入生产代码改动。
+- 在日常开发里足够轻：不强推统一覆盖率门槛，也不要求每个任务都写 E2E。
+- 卡住时也可恢复：未完成的工作依然会留下结构化交接信息。
+- 足够小、足够实用：能装进真实项目，而不是把每次小改动都升级成发布门禁流程。
 
 ## 快速使用
 
@@ -25,32 +32,59 @@ harness install https://github.com/zack-nova/orbit-tdd-template.git
 - 只在 GREEN 后重构，并保持 GREEN
 - 在 `docs/tdd/records/` 中记录 RED/GREEN/REFACTOR 证据
 
+## Spec 画像
+
+下面这张表把当前 `tdd` spec 和精选参考工作流放到同一口径下做了对比。
+
+| Spec | Use Case | Static Load | Startup | 写入边界 | 验证强度 | 恢复/交接 | 最大文件 |
+| --- | --- | ---: | ---: | --- | --- | --- | ---: |
+| `tdd` | TDD / code change | 2.8k | D2/R4 | 中 (3/7) | 强 + probe | 完整 (4态) | 1.0k |
+| `superpowers:tdd` | TDD / code change | 4.0k | D1/R1 | 窄 (2/7) | 强 | 脆弱 (1态) | 2.4k |
+| `ecc:tdd` | TDD + coverage | 23.9k | D2/R2 | 中 (3/7) | 强 | 脆弱 (1态) | 16.5k |
+| `spec-kit:implement` | Spec-first implementation | 27.6k | D2/R2 | 中 (3/7) | 强 | 可恢复 (3态) | 14.5k |
+| `gsd:verify` | Verification / UAT | 27.5k | D1/R1 | 中 (3/7) | 强 | 完整 (4态) | 10.0k |
+| `gstack:qa` | QA / fix / ship | 57.2k | D2/R2 | 中 (4/7) | 强 | 完整 (3态) | 32.9k |
+| `bmad:testing` | Test generation / QA | 2.1k | D1/R1 | 中 (4/7) | 强 | 脆弱 (1态) | 1.2k |
+| `openspec:workflow` | Spec-first change workflow | 16.2k | D2/R2 | 中 (3/7) | 中 | 可恢复 (2态) | 4.8k |
+| `omc:entry` | Agent orchestration / TDD | 15.8k | D2/R2 | 中 (4/7) | 强 | 可恢复 (3态) | 11.0k |
+
+- `Static Load`：安装态静态文档集的总 token 数
+- `Startup`：`D` = 必经阅读层数，`R` = 开始执行前必读文件数
+- `写入边界`：正常任务路径下，7 个通用 surface 中可写的数量
+- `验证强度`：基于显式验证动作、final validation 和 cheap probe
+- `恢复/交接`：基于结构化非成功状态与交接字段
+- `最大文件`：安装态静态文档集中的最大文件
+
+外部参考行基于精选工作流文档集评测，不是对整仓库做泛化扫描。
+
 ## 你会得到什么
 
 - 一个用于 test-first 功能、修 bug、重构和行为变更的 `tdd` orbit。
-- 一份简洁的 worker brief，让 Agent 直接进入 TDD 工作合同。
-- `docs/tdd/` 下的 TDD 规则和流程说明。
-- 一份可复用的 TDD 记录模板，用来记录任务证据。
+- 一份简洁的 worker brief，让 Agent 快速进入 TDD 循环。
+- `docs/tdd/` 下的 TDD 规则与流程文档。
+- 一份可复用的 TDD 记录模板，用来保存任务证据。
 - `tools/check-tdd-records.sh`，用于快速检查记录是否就绪。
 
-如果你的项目需要更窄或更宽的写入范围，安装后调整 `.harness/orbits/tdd.yaml`
-里的 `tdd` orbit 即可。
+如果你的项目需要不同的写入边界，可以在安装后调整
+`.harness/orbits/tdd.yaml` 里的 `tdd` orbit。
 
-## 这份模板参考了哪些经验
+## 适合什么场景
 
-这个模板调研并吸收了多种 TDD、test-first、验证优先和 spec-first 的 Agent
-工作流。GitHub star 数检查于 2026-04-12。
+- 可以找到明确自动化测试目标的功能、修 bug、重构或行为变更
+- 需要显式 regression evidence 的 bug fix
+- 团队想要 TDD 纪律，但不想把每个任务都升级成完整 QA 工程
 
-| 仓库 | Stars | 参考了什么 |
-| --- | ---: | --- |
-| [superpowers](https://github.com/obra/superpowers) | 147,851 | 严格 TDD 核心最清楚：有效 RED 在前、最小 GREEN、然后重构。本模板保留这个硬内核，同时把 blocked 情况处理得更适合交接。 |
-| [everything-claude-code](https://github.com/affaan-m/everything-claude-code) | 152,062 | TDD agent/workflow 结构完整，强调证据和测试层级。本模板吸收证据记录意识，但不强制统一覆盖率数字。 |
-| [spec-kit](https://github.com/github/spec-kit) | 87,242 | 很适合参考由项目原则和 spec 清晰度驱动的 test-first 顺序。本模板保留项目自身测试纪律的空间。 |
-| [get-shit-done](https://github.com/gsd-build/get-shit-done) | 51,071 | 验证、gap、blocked/handoff 记录做得好。本模板借鉴了失败或不确定时也能留下可交接证据的做法。 |
-| [gstack](https://github.com/garrytan/gstack) | 70,314 | 回归测试和覆盖率审计意识强。本模板把 bug fix 与 regression evidence 绑定起来。 |
-| [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) | 44,347 | QA、ATDD、traceability 视角完整。本模板把它们作为复杂场景的升级方向，而不是每个小任务的默认负担。 |
-| [OpenSpec](https://github.com/Fission-AI/OpenSpec) | 39,231 | spec-first 纪律适合处理需求不清或不可测试的情况。本模板要求 Agent 在无法建立有效测试目标时先停下并澄清。 |
-| [oh-my-claudecode](https://github.com/Yeachan-Heo/oh-my-claudecode) | 27,919 | keyword/shortcut 进入 TDD 模式的思路很轻。本模板也保持 worker 入口简短，让 Agent 快速进入 test-first 循环。 |
+## 不适合什么场景
 
-最终目标是：在 TDD 该严格的地方保持严格，同时足够轻量，能被安装进真实项目，
-而不是把每次小改动都变成完整 QA 工程。
+- 一次性 spike、生成代码或纯配置改动，除非人类伙伴明确批准跳过 TDD
+- 完整发布 QA、企业测试治理或合规型验证
+- 需求还不清楚，暂时无法转成有意义测试目标的任务
+
+## 设计来源
+
+这个模板吸收了多种强 TDD、验证优先和 spec-first 工作流的经验，最后收口成下面几个原则：
+
+- RED/GREEN/REFACTOR 核心保持严格
+- 覆盖率、E2E 扩展和更重的 QA 要求，交给项目规则或升级路径处理
+- blocked 工作也必须可观察、可交接
+- worker 入口保持简短，让 Agent 更快进入 test-first 循环

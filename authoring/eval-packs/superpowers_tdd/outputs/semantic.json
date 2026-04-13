@@ -1,0 +1,186 @@
+{
+  "spec_display": "superpowers:tdd",
+  "use_case_display": "TDD / code change",
+  "use_case_evidence": [
+    {
+      "file": "skills/test-driven-development/SKILL.md",
+      "must_contain": "description: Use when implementing any feature or bugfix, before writing implementation code"
+    },
+    {
+      "file": "skills/test-driven-development/SKILL.md",
+      "must_contain": "## When to Use"
+    }
+  ],
+  "startup": {
+    "phases": [
+      {
+        "files": [
+          "skills/test-driven-development/SKILL.md"
+        ],
+        "why": "The skill file defines the use case, the iron law, and the Red-Green-Refactor loop directly.",
+        "evidence": [
+          {
+            "file": "skills/test-driven-development/SKILL.md",
+            "must_contain": "# Test-Driven Development (TDD)"
+          },
+          {
+            "file": "skills/test-driven-development/SKILL.md",
+            "must_contain": "## The Iron Law"
+          }
+        ]
+      }
+    ]
+  },
+  "verification": {
+    "label": "strong",
+    "actions": [
+      {
+        "id": "verify_red",
+        "kind": "target_check",
+        "why": "The workflow requires running the new test and confirming a real RED state.",
+        "evidence": [
+          {
+            "file": "skills/test-driven-development/SKILL.md",
+            "must_contain": "### Verify RED - Watch It Fail"
+          },
+          {
+            "file": "skills/test-driven-development/SKILL.md",
+            "must_contain": "Confirm:"
+          }
+        ]
+      },
+      {
+        "id": "verify_green",
+        "kind": "rerun_same_target",
+        "why": "The same target must be rerun and shown green before moving on.",
+        "evidence": [
+          {
+            "file": "skills/test-driven-development/SKILL.md",
+            "must_contain": "### Verify GREEN - Watch It Pass"
+          },
+          {
+            "file": "skills/test-driven-development/SKILL.md",
+            "must_contain": "Other tests still pass"
+          }
+        ]
+      },
+      {
+        "id": "verification_checklist",
+        "kind": "final_validation",
+        "why": "Completion is gated by a verification checklist before work can be marked complete.",
+        "evidence": [
+          {
+            "file": "skills/test-driven-development/SKILL.md",
+            "must_contain": "## Verification Checklist"
+          },
+          {
+            "file": "skills/test-driven-development/SKILL.md",
+            "must_contain": "Before marking work complete:"
+          }
+        ]
+      }
+    ],
+    "has_probe": false
+  },
+  "write_boundary": {
+    "surfaces": [
+      {
+        "key": "entry_brief",
+        "writable": false,
+        "why": "The skill is read as the operating contract and is not rewritten during normal execution.",
+        "evidence": [
+          {
+            "file": "skills/test-driven-development/SKILL.md",
+            "must_contain": "# Test-Driven Development (TDD)"
+          }
+        ]
+      },
+      {
+        "key": "rules_workflow",
+        "writable": false,
+        "why": "The workflow description is instructional and not an output artifact.",
+        "evidence": [
+          {
+            "file": "skills/test-driven-development/SKILL.md",
+            "must_contain": "## Red-Green-Refactor"
+          }
+        ]
+      },
+      {
+        "key": "implementation_code",
+        "writable": true,
+        "why": "The GREEN step explicitly instructs the reader to write production code.",
+        "evidence": [
+          {
+            "file": "skills/test-driven-development/SKILL.md",
+            "must_contain": "### GREEN - Minimal Code"
+          }
+        ]
+      },
+      {
+        "key": "tests_checks",
+        "writable": true,
+        "why": "The RED step explicitly starts by writing a failing test.",
+        "evidence": [
+          {
+            "file": "skills/test-driven-development/SKILL.md",
+            "must_contain": "### RED - Write Failing Test"
+          }
+        ]
+      },
+      {
+        "key": "evidence_records",
+        "writable": false,
+        "why": "The workflow uses a checklist but does not define a dedicated record file or evidence artifact.",
+        "evidence": [
+          {
+            "file": "skills/test-driven-development/SKILL.md",
+            "must_contain": "## Verification Checklist"
+          }
+        ]
+      },
+      {
+        "key": "specs_plans",
+        "writable": false,
+        "why": "The loop goes directly from failing test to minimal code without creating spec or plan artifacts.",
+        "evidence": [
+          {
+            "file": "skills/test-driven-development/SKILL.md",
+            "must_contain": "Write the test first. Watch it fail. Write minimal code to pass."
+          }
+        ]
+      },
+      {
+        "key": "qa_release_review",
+        "writable": false,
+        "why": "The completion checklist validates the TDD loop but does not create a separate QA or release-review artifact.",
+        "evidence": [
+          {
+            "file": "skills/test-driven-development/SKILL.md",
+            "must_contain": "Before marking work complete:"
+          }
+        ]
+      }
+    ]
+  },
+  "recovery": {
+    "label": "fragile",
+    "non_success_states": [
+      "stuck"
+    ],
+    "has_blocked_reason": false,
+    "has_next_step": false,
+    "has_files_touched": false,
+    "has_final_validation": true,
+    "evidence": [
+      {
+        "file": "skills/test-driven-development/SKILL.md",
+        "must_contain": "## When Stuck"
+      },
+      {
+        "file": "skills/test-driven-development/SKILL.md",
+        "must_contain": "Ask your human partner."
+      }
+    ]
+  }
+}

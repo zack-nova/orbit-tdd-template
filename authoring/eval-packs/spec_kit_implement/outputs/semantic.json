@@ -1,0 +1,216 @@
+{
+  "spec_display": "spec-kit:implement",
+  "use_case_display": "Spec-first implementation",
+  "use_case_evidence": [
+    {
+      "file": "spec-driven.md",
+      "must_contain": "The SDD methodology is significantly enhanced through three powerful commands that automate the specification \u2192 planning \u2192 tasking workflow"
+    },
+    {
+      "file": "docs/quickstart.md",
+      "must_contain": "Then, use the `/speckit.implement` slash command to execute the plan."
+    }
+  ],
+  "startup": {
+    "phases": [
+      {
+        "files": [
+          "docs/quickstart.md"
+        ],
+        "why": "The quickstart defines the six-step user flow that leads into implementation.",
+        "evidence": [
+          {
+            "file": "docs/quickstart.md",
+            "must_contain": "## The 6-Step Process"
+          },
+          {
+            "file": "docs/quickstart.md",
+            "must_contain": "### Step 6: Break Down and Implement"
+          }
+        ]
+      },
+      {
+        "files": [
+          "templates/commands/implement.md"
+        ],
+        "why": "The implement command defines the required pre-execution checks and the documents that must be loaded before work starts.",
+        "evidence": [
+          {
+            "file": "templates/commands/implement.md",
+            "must_contain": "## Pre-Execution Checks"
+          },
+          {
+            "file": "templates/commands/implement.md",
+            "must_contain": "**REQUIRED**: Read tasks.md for the complete task list and execution plan"
+          }
+        ]
+      }
+    ]
+  },
+  "verification": {
+    "label": "strong",
+    "actions": [
+      {
+        "id": "spec_checklist",
+        "kind": "target_check",
+        "why": "The quickstart requires validating the specification checklist before planning continues.",
+        "evidence": [
+          {
+            "file": "docs/quickstart.md",
+            "must_contain": "Validate the specification checklist using the `/speckit.checklist` command"
+          }
+        ]
+      },
+      {
+        "id": "plan_audit",
+        "kind": "regression_check",
+        "why": "The quickstart explicitly asks the agent to audit the implementation plan with analyze.",
+        "evidence": [
+          {
+            "file": "docs/quickstart.md",
+            "must_contain": "Have your AI agent audit the implementation plan using `/speckit.analyze`"
+          }
+        ]
+      },
+      {
+        "id": "completion_validation",
+        "kind": "final_validation",
+        "why": "The implement command ends with explicit completion validation, including tests and coverage.",
+        "evidence": [
+          {
+            "file": "templates/commands/implement.md",
+            "must_contain": "9. Completion validation:"
+          },
+          {
+            "file": "templates/commands/implement.md",
+            "must_contain": "Validate that tests pass and coverage meets requirements"
+          }
+        ]
+      }
+    ],
+    "has_probe": false
+  },
+  "write_boundary": {
+    "surfaces": [
+      {
+        "key": "entry_brief",
+        "writable": false,
+        "why": "The command template is read as execution guidance and not rewritten during normal work.",
+        "evidence": [
+          {
+            "file": "templates/commands/implement.md",
+            "must_contain": "description: Execute the implementation plan by processing and executing all tasks defined in tasks.md"
+          }
+        ]
+      },
+      {
+        "key": "rules_workflow",
+        "writable": false,
+        "why": "The command outline and SDD explanation are workflow instructions, not outputs.",
+        "evidence": [
+          {
+            "file": "templates/commands/implement.md",
+            "must_contain": "## Outline"
+          }
+        ]
+      },
+      {
+        "key": "implementation_code",
+        "writable": true,
+        "why": "The implement command explicitly directs core development of models, services, endpoints, and other code.",
+        "evidence": [
+          {
+            "file": "templates/commands/implement.md",
+            "must_contain": "**Core development**: Implement models, services, CLI commands, endpoints"
+          }
+        ]
+      },
+      {
+        "key": "tests_checks",
+        "writable": true,
+        "why": "The workflow explicitly requires test tasks before implementation tasks and validates tests and coverage.",
+        "evidence": [
+          {
+            "file": "templates/commands/implement.md",
+            "must_contain": "**Follow TDD approach**: Execute test tasks before their corresponding implementation tasks"
+          },
+          {
+            "file": "templates/commands/implement.md",
+            "must_contain": "Validate that tests pass and coverage meets requirements"
+          }
+        ]
+      },
+      {
+        "key": "evidence_records",
+        "writable": false,
+        "why": "The command tracks completion in tasks.md but does not define a separate evidence record surface.",
+        "evidence": [
+          {
+            "file": "templates/commands/implement.md",
+            "must_contain": "make sure to mark the task off as [X] in the tasks file."
+          }
+        ]
+      },
+      {
+        "key": "specs_plans",
+        "writable": true,
+        "why": "The workflow creates and consumes spec, plan, research, data-model, contracts, quickstart, and tasks artifacts.",
+        "evidence": [
+          {
+            "file": "spec-driven.md",
+            "must_contain": "# - specs/003-chat-system/plan.md"
+          },
+          {
+            "file": "spec-driven.md",
+            "must_contain": "# - specs/003-chat-system/tasks.md (Task list derived from the plan)"
+          }
+        ]
+      },
+      {
+        "key": "qa_release_review",
+        "writable": false,
+        "why": "The workflow validates implementation quality but does not define a dedicated release-review artifact.",
+        "evidence": [
+          {
+            "file": "templates/commands/implement.md",
+            "must_contain": "Report final status with summary of completed work"
+          }
+        ]
+      }
+    ]
+  },
+  "recovery": {
+    "label": "recoverable",
+    "non_success_states": [
+      "checklist_fail",
+      "task_failure",
+      "needs_clarification"
+    ],
+    "has_blocked_reason": true,
+    "has_next_step": true,
+    "has_files_touched": false,
+    "has_final_validation": true,
+    "evidence": [
+      {
+        "file": "templates/commands/implement.md",
+        "must_contain": "**If any checklist is incomplete**:"
+      },
+      {
+        "file": "templates/commands/implement.md",
+        "must_contain": "Halt execution if any non-parallel task fails"
+      },
+      {
+        "file": "templates/commands/implement.md",
+        "must_contain": "Suggest next steps if implementation cannot proceed"
+      },
+      {
+        "file": "spec-driven.md",
+        "must_contain": "When creating this spec from a user prompt:"
+      },
+      {
+        "file": "spec-driven.md",
+        "must_contain": "Use [NEEDS CLARIFICATION: specific question]"
+      }
+    ]
+  }
+}

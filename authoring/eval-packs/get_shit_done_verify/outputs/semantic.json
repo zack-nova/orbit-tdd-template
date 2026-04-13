@@ -1,0 +1,213 @@
+{
+  "spec_display": "gsd:verify",
+  "use_case_display": "Verification / UAT",
+  "use_case_evidence": [
+    {
+      "file": "get-shit-done/workflows/verify-work.md",
+      "must_contain": "Validate built features through conversational testing with persistent state. Creates UAT.md that tracks test progress"
+    },
+    {
+      "file": "README.md",
+      "must_contain": "### 5. Verify Work"
+    }
+  ],
+  "startup": {
+    "phases": [
+      {
+        "files": [
+          "get-shit-done/workflows/verify-work.md"
+        ],
+        "why": "The verify-work workflow file contains the actual verification session contract, UAT structure, and status transitions.",
+        "evidence": [
+          {
+            "file": "get-shit-done/workflows/verify-work.md",
+            "must_contain": "<purpose>"
+          },
+          {
+            "file": "get-shit-done/workflows/verify-work.md",
+            "must_contain": "<step name=\"create_uat_file\">"
+          }
+        ]
+      }
+    ]
+  },
+  "verification": {
+    "label": "strong",
+    "actions": [
+      {
+        "id": "manual_uat",
+        "kind": "target_check",
+        "why": "The core workflow runs one user-observable checkpoint at a time and records the result.",
+        "evidence": [
+          {
+            "file": "get-shit-done/workflows/verify-work.md",
+            "must_contain": "One test at a time. Plain text responses."
+          },
+          {
+            "file": "get-shit-done/workflows/verify-work.md",
+            "must_contain": "Show expected, ask if reality matches."
+          }
+        ]
+      },
+      {
+        "id": "behavioral_verification",
+        "kind": "final_validation",
+        "why": "The phase verifier runs the real test suite and project commands as behavioral checks.",
+        "evidence": [
+          {
+            "file": "get-shit-done/workflows/verify-phase.md",
+            "must_contain": "## Behavioral Verification"
+          },
+          {
+            "file": "get-shit-done/workflows/verify-phase.md",
+            "must_contain": "Run the project's test suite and CLI commands to verify behavior, not just structure."
+          }
+        ]
+      },
+      {
+        "id": "test_quality_audit",
+        "kind": "regression_check",
+        "why": "The phase verifier audits whether tests really prove what they claim to prove.",
+        "evidence": [
+          {
+            "file": "get-shit-done/workflows/verify-phase.md",
+            "must_contain": "### Test Quality Audit"
+          },
+          {
+            "file": "get-shit-done/workflows/verify-phase.md",
+            "must_contain": "Verify that tests PROVE what they claim to prove."
+          }
+        ]
+      }
+    ],
+    "has_probe": false
+  },
+  "write_boundary": {
+    "surfaces": [
+      {
+        "key": "entry_brief",
+        "writable": false,
+        "why": "The workflow brief is read to run verification and is not rewritten during the task.",
+        "evidence": [
+          {
+            "file": "get-shit-done/workflows/verify-work.md",
+            "must_contain": "<purpose>"
+          }
+        ]
+      },
+      {
+        "key": "rules_workflow",
+        "writable": false,
+        "why": "The XML workflow file defines the process but is not an output artifact.",
+        "evidence": [
+          {
+            "file": "get-shit-done/workflows/verify-work.md",
+            "must_contain": "<process>"
+          }
+        ]
+      },
+      {
+        "key": "implementation_code",
+        "writable": false,
+        "why": "This comparison unit verifies built work and records gaps rather than implementing production code directly.",
+        "evidence": [
+          {
+            "file": "get-shit-done/workflows/verify-work.md",
+            "must_contain": "User tests, Claude records."
+          }
+        ]
+      },
+      {
+        "key": "tests_checks",
+        "writable": true,
+        "why": "The bundle includes test generation and repeated automated verification.",
+        "evidence": [
+          {
+            "file": "get-shit-done/workflows/add-tests.md",
+            "must_contain": "## Test Generation Plan"
+          },
+          {
+            "file": "get-shit-done/workflows/verify-phase.md",
+            "must_contain": "Run the project's test suite and CLI commands to verify behavior, not just structure."
+          }
+        ]
+      },
+      {
+        "key": "evidence_records",
+        "writable": true,
+        "why": "The workflow creates and updates a persistent UAT file with tests, results, summary, and gaps.",
+        "evidence": [
+          {
+            "file": "get-shit-done/workflows/verify-work.md",
+            "must_contain": "Creates UAT.md that tracks test progress"
+          },
+          {
+            "file": "get-shit-done/workflows/verify-work.md",
+            "must_contain": "## Gaps"
+          }
+        ]
+      },
+      {
+        "key": "specs_plans",
+        "writable": false,
+        "why": "The workflow feeds gaps into planning, but it does not directly write plan or spec artifacts in the normal path.",
+        "evidence": [
+          {
+            "file": "get-shit-done/workflows/verify-work.md",
+            "must_contain": "feeds gaps into /gsd-plan-phase --gaps"
+          }
+        ]
+      },
+      {
+        "key": "qa_release_review",
+        "writable": true,
+        "why": "Verification completion is a phase gate and can trigger the next planning, execution, security, and UI review steps.",
+        "evidence": [
+          {
+            "file": "get-shit-done/workflows/verify-work.md",
+            "must_contain": "All tests passed. Ready to continue."
+          },
+          {
+            "file": "get-shit-done/workflows/verify-work.md",
+            "must_contain": "/gsd-secure-phase {phase}"
+          }
+        ]
+      }
+    ]
+  },
+  "recovery": {
+    "label": "complete",
+    "non_success_states": [
+      "blocked",
+      "issue",
+      "partial",
+      "needs_human"
+    ],
+    "has_blocked_reason": true,
+    "has_next_step": true,
+    "has_files_touched": false,
+    "has_final_validation": true,
+    "evidence": [
+      {
+        "file": "get-shit-done/workflows/verify-work.md",
+        "must_contain": "result: blocked"
+      },
+      {
+        "file": "get-shit-done/workflows/verify-work.md",
+        "must_contain": "result: issue"
+      },
+      {
+        "file": "get-shit-done/workflows/verify-work.md",
+        "must_contain": "status: partial"
+      },
+      {
+        "file": "get-shit-done/workflows/verify-phase.md",
+        "must_contain": "? NEEDS HUMAN"
+      },
+      {
+        "file": "get-shit-done/workflows/verify-work.md",
+        "must_contain": "## ▶ Next Up"
+      }
+    ]
+  }
+}

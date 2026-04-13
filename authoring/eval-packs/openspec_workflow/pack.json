@@ -1,0 +1,30 @@
+{
+  "row_id": "openspec_workflow",
+  "spec_display": "openspec:workflow",
+  "source_kind": "external_reference",
+  "source_repo": "Fission-AI/OpenSpec",
+  "source_commit": null,
+  "source_commit_pinned": false,
+  "comparison_unit": "core concepts and workflow docs",
+  "entrypoint_files": [
+    "README.md",
+    "docs/workflows.md"
+  ],
+  "allowed_files": [
+    "README.md",
+    "docs/concepts.md",
+    "docs/workflows.md",
+    "docs/commands.md",
+    "docs/getting-started.md"
+  ],
+  "missing_files": [],
+  "surface_taxonomy": [
+    "entry_brief",
+    "rules_workflow",
+    "implementation_code",
+    "tests_checks",
+    "evidence_records",
+    "specs_plans",
+    "qa_release_review"
+  ]
+}

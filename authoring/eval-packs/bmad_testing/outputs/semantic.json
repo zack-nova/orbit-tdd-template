@@ -1,0 +1,182 @@
+{
+  "spec_display": "bmad:testing",
+  "use_case_display": "Test generation / QA",
+  "use_case_evidence": [
+    {
+      "file": "docs/reference/testing.md",
+      "must_contain": "BMad provides two testing paths: a built-in QA workflow for fast test generation and an installable Test Architect module for enterprise-grade test strategy."
+    }
+  ],
+  "startup": {
+    "phases": [
+      {
+        "files": [
+          "docs/reference/testing.md"
+        ],
+        "why": "The testing reference page defines both the built-in QA path and the optional TEA path.",
+        "evidence": [
+          {
+            "file": "docs/reference/testing.md",
+            "must_contain": "## Built-in QA Workflow"
+          },
+          {
+            "file": "docs/reference/testing.md",
+            "must_contain": "## Test Architect (TEA) Module"
+          }
+        ]
+      }
+    ]
+  },
+  "verification": {
+    "label": "strong",
+    "actions": [
+      {
+        "id": "run_and_verify",
+        "kind": "target_check",
+        "why": "The built-in QA path ends by executing generated tests and fixing failures.",
+        "evidence": [
+          {
+            "file": "docs/reference/testing.md",
+            "must_contain": "5. **Run and verify** -- executes the generated tests and fixes failures immediately."
+          }
+        ]
+      },
+      {
+        "id": "test_review",
+        "kind": "regression_check",
+        "why": "The TEA path includes a dedicated test review workflow.",
+        "evidence": [
+          {
+            "file": "docs/reference/testing.md",
+            "must_contain": "| Test Review | Validate test quality and coverage against strategy |"
+          }
+        ]
+      },
+      {
+        "id": "release_gate",
+        "kind": "final_validation",
+        "why": "The TEA path includes an explicit release gate workflow.",
+        "evidence": [
+          {
+            "file": "docs/reference/testing.md",
+            "must_contain": "| Release Gate | Make data-driven go/no-go release decisions |"
+          }
+        ]
+      }
+    ],
+    "has_probe": false
+  },
+  "write_boundary": {
+    "surfaces": [
+      {
+        "key": "entry_brief",
+        "writable": false,
+        "why": "The reference page is read as guidance and not rewritten during execution.",
+        "evidence": [
+          {
+            "file": "docs/reference/testing.md",
+            "must_contain": "## Which Should You Use?"
+          }
+        ]
+      },
+      {
+        "key": "rules_workflow",
+        "writable": false,
+        "why": "The page explains the workflow choices but does not define editable rule files.",
+        "evidence": [
+          {
+            "file": "docs/reference/testing.md",
+            "must_contain": "## How Testing Fits into Workflows"
+          }
+        ]
+      },
+      {
+        "key": "implementation_code",
+        "writable": false,
+        "why": "The comparison page is about test automation and strategy, not normal production code edits.",
+        "evidence": [
+          {
+            "file": "docs/reference/testing.md",
+            "must_contain": "The QA workflow generates tests only."
+          }
+        ]
+      },
+      {
+        "key": "tests_checks",
+        "writable": true,
+        "why": "Both paths explicitly generate or automate tests.",
+        "evidence": [
+          {
+            "file": "docs/reference/testing.md",
+            "must_contain": "3. **Generate API tests**"
+          },
+          {
+            "file": "docs/reference/testing.md",
+            "must_contain": "4. **Generate E2E tests**"
+          }
+        ]
+      },
+      {
+        "key": "evidence_records",
+        "writable": true,
+        "why": "The built-in QA workflow saves a test summary to project artifacts.",
+        "evidence": [
+          {
+            "file": "docs/reference/testing.md",
+            "must_contain": "The workflow produces a test summary saved to your project's implementation artifacts folder."
+          }
+        ]
+      },
+      {
+        "key": "specs_plans",
+        "writable": true,
+        "why": "The TEA path includes test strategy, ATDD, and traceability artifacts tied to requirements.",
+        "evidence": [
+          {
+            "file": "docs/reference/testing.md",
+            "must_contain": "| Test Design | Create a comprehensive test strategy tied to requirements |"
+          },
+          {
+            "file": "docs/reference/testing.md",
+            "must_contain": "| Traceability | Map tests back to requirements for audit and compliance |"
+          }
+        ]
+      },
+      {
+        "key": "qa_release_review",
+        "writable": true,
+        "why": "The TEA path includes explicit NFR assessment and release gate workflows.",
+        "evidence": [
+          {
+            "file": "docs/reference/testing.md",
+            "must_contain": "| NFR Assessment | Evaluate non-functional requirements (performance, security) |"
+          },
+          {
+            "file": "docs/reference/testing.md",
+            "must_contain": "| Release Gate | Make data-driven go/no-go release decisions |"
+          }
+        ]
+      }
+    ]
+  },
+  "recovery": {
+    "label": "fragile",
+    "non_success_states": [
+      "needs_tea"
+    ],
+    "has_blocked_reason": false,
+    "has_next_step": true,
+    "has_files_touched": false,
+    "has_final_validation": false,
+    "evidence": [
+      {
+        "file": "docs/reference/testing.md",
+        "must_contain": "If you later need test strategy, quality gates, or requirements traceability, install TEA alongside it."
+      },
+      {
+        "file": "docs/reference/testing.md",
+        "must_contain": "Projects that have outgrown the built-in QA's single-workflow approach"
+      }
+    ]
+  }
+}

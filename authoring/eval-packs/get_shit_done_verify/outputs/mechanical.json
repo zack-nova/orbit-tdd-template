@@ -1,0 +1,40 @@
+{
+  "row_id": "get_shit_done_verify",
+  "spec_display": "gsd:verify",
+  "source_kind": "external_reference",
+  "source_repo": "gsd-build/get-shit-done",
+  "source_commit": null,
+  "source_commit_pinned": false,
+  "tokenizer": "o200k_base",
+  "static_file_count": 5,
+  "static_file_tokens": [
+    {
+      "path": "README.md",
+      "tokens": 9969
+    },
+    {
+      "path": "get-shit-done/workflows/add-tests.md",
+      "tokens": 2931
+    },
+    {
+      "path": "get-shit-done/workflows/verify-work.md",
+      "tokens": 5413
+    },
+    {
+      "path": "get-shit-done/workflows/verify-phase.md",
+      "tokens": 4765
+    },
+    {
+      "path": "get-shit-done/references/verification-patterns.md",
+      "tokens": 4425
+    }
+  ],
+  "static_load_tokens": 27503,
+  "static_load_display": "27.5k",
+  "max_file": {
+    "path": "README.md",
+    "tokens": 9969,
+    "display": "10.0k"
+  },
+  "missing_files": []
+}

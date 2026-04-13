@@ -3,4 +3,4 @@ set -eu
 
 script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 
-exec "$script_dir/readme/fetch-reference-docs.sh" "$@"
+exec python "$script_dir/../scripts/validate_semantic_eval.py" "$@"

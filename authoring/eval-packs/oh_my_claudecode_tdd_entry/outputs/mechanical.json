@@ -1,0 +1,28 @@
+{
+  "row_id": "oh_my_claudecode_tdd_entry",
+  "spec_display": "omc:entry",
+  "source_kind": "external_reference",
+  "source_repo": "Yeachan-Heo/oh-my-claudecode",
+  "source_commit": null,
+  "source_commit_pinned": false,
+  "tokenizer": "o200k_base",
+  "static_file_count": 2,
+  "static_file_tokens": [
+    {
+      "path": "AGENTS.md",
+      "tokens": 4848
+    },
+    {
+      "path": "docs/REFERENCE.md",
+      "tokens": 10961
+    }
+  ],
+  "static_load_tokens": 15809,
+  "static_load_display": "15.8k",
+  "max_file": {
+    "path": "docs/REFERENCE.md",
+    "tokens": 10961,
+    "display": "11.0k"
+  },
+  "missing_files": []
+}

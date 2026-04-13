@@ -1,0 +1,136 @@
+{
+  "rows": [
+    {
+      "row_id": "superpowers_tdd",
+      "spec_display": "superpowers:tdd",
+      "source_kind": "external_reference",
+      "source_repo": "obra/superpowers",
+      "comparison_unit": "test-driven-development skill",
+      "entrypoint_files": [
+        "skills/test-driven-development/SKILL.md"
+      ],
+      "files": [
+        "README.md",
+        "skills/test-driven-development/SKILL.md"
+      ]
+    },
+    {
+      "row_id": "everything_claude_code_tdd",
+      "spec_display": "ecc:tdd",
+      "source_kind": "external_reference",
+      "source_repo": "affaan-m/everything-claude-code",
+      "comparison_unit": "tdd workflow bundle",
+      "entrypoint_files": [
+        "agents/tdd-guide.md",
+        "skills/tdd-workflow/SKILL.md",
+        "commands/tdd.md"
+      ],
+      "files": [
+        "README.md",
+        "agents/tdd-guide.md",
+        "skills/tdd-workflow/SKILL.md",
+        "commands/tdd.md",
+        ".opencode/prompts/agents/tdd-guide.txt",
+        ".kiro/agents/tdd-guide.md"
+      ]
+    },
+    {
+      "row_id": "spec_kit_implement",
+      "spec_display": "spec-kit:implement",
+      "source_kind": "external_reference",
+      "source_repo": "github/spec-kit",
+      "comparison_unit": "implement/tasks/constitution flow",
+      "entrypoint_files": [
+        "spec-driven.md",
+        "templates/commands/implement.md"
+      ],
+      "files": [
+        "README.md",
+        "spec-driven.md",
+        "templates/commands/implement.md",
+        "templates/commands/tasks.md",
+        "templates/commands/constitution.md",
+        "docs/quickstart.md"
+      ]
+    },
+    {
+      "row_id": "get_shit_done_verify",
+      "spec_display": "gsd:verify",
+      "source_kind": "external_reference",
+      "source_repo": "gsd-build/get-shit-done",
+      "comparison_unit": "verification workflow bundle",
+      "entrypoint_files": [
+        "get-shit-done/workflows/verify-work.md"
+      ],
+      "files": [
+        "README.md",
+        "get-shit-done/workflows/add-tests.md",
+        "get-shit-done/workflows/verify-work.md",
+        "get-shit-done/workflows/verify-phase.md",
+        "get-shit-done/references/verification-patterns.md"
+      ]
+    },
+    {
+      "row_id": "gstack_qa",
+      "spec_display": "gstack:qa",
+      "source_kind": "external_reference",
+      "source_repo": "garrytan/gstack",
+      "comparison_unit": "qa and ship workflow pair",
+      "entrypoint_files": [
+        "qa/SKILL.md"
+      ],
+      "files": [
+        "README.md",
+        "qa/SKILL.md",
+        "ship/SKILL.md"
+      ]
+    },
+    {
+      "row_id": "bmad_testing",
+      "spec_display": "bmad:testing",
+      "source_kind": "external_reference",
+      "source_repo": "bmad-code-org/BMAD-METHOD",
+      "comparison_unit": "testing and modules reference",
+      "entrypoint_files": [
+        "docs/reference/testing.md"
+      ],
+      "files": [
+        "docs/reference/testing.md",
+        "docs/reference/modules.md"
+      ]
+    },
+    {
+      "row_id": "openspec_workflow",
+      "spec_display": "openspec:workflow",
+      "source_kind": "external_reference",
+      "source_repo": "Fission-AI/OpenSpec",
+      "comparison_unit": "core concepts and workflow docs",
+      "entrypoint_files": [
+        "README.md",
+        "docs/workflows.md"
+      ],
+      "files": [
+        "README.md",
+        "docs/concepts.md",
+        "docs/workflows.md",
+        "docs/commands.md",
+        "docs/getting-started.md"
+      ]
+    },
+    {
+      "row_id": "oh_my_claudecode_tdd_entry",
+      "spec_display": "omc:entry",
+      "source_kind": "external_reference",
+      "source_repo": "Yeachan-Heo/oh-my-claudecode",
+      "comparison_unit": "entry-mode and reference docs",
+      "entrypoint_files": [
+        "AGENTS.md",
+        "docs/REFERENCE.md"
+      ],
+      "files": [
+        "AGENTS.md",
+        "docs/REFERENCE.md"
+      ]
+    }
+  ]
+}

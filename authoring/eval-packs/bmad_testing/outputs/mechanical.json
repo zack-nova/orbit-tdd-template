@@ -1,0 +1,28 @@
+{
+  "row_id": "bmad_testing",
+  "spec_display": "bmad:testing",
+  "source_kind": "external_reference",
+  "source_repo": "bmad-code-org/BMAD-METHOD",
+  "source_commit": null,
+  "source_commit_pinned": false,
+  "tokenizer": "o200k_base",
+  "static_file_count": 2,
+  "static_file_tokens": [
+    {
+      "path": "docs/reference/testing.md",
+      "tokens": 1241
+    },
+    {
+      "path": "docs/reference/modules.md",
+      "tokens": 812
+    }
+  ],
+  "static_load_tokens": 2053,
+  "static_load_display": "2.1k",
+  "max_file": {
+    "path": "docs/reference/testing.md",
+    "tokens": 1241,
+    "display": "1.2k"
+  },
+  "missing_files": []
+}
